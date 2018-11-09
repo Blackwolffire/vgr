@@ -13,8 +13,6 @@ struct vec2
 
 struct game_object
 {
-    SDL_Window *window;
-    SDL_Render *render;
     SDL_Rect gpos;
     SDL_Rect gprev;
     struct vec2 pos;
