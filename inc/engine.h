@@ -20,6 +20,12 @@ struct game_object
     char isupdate;
 };
 
+struct game_state
+{
+    SDL_Window *window;
+    SDL_Renderer *renderer;
+}
+
 struct vec2 vadd(struct vec2 a, struct vec2 b);
 struct vec2 vsub(struct vec2 b, struct vec2 b);
 
