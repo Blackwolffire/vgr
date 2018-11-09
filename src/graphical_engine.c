@@ -18,3 +18,10 @@ void init_sdl(struct game_state *g_st)
     g_st->window = window;
     g_st->renderer = renderer;
 }
+
+void free_sdl(struct game_state *g_st)
+{
+    SDL_DestroyWindow(g_st->window);
+    SDL_DestroyRenderer(g_st->renderer);
+    SDL_Quit();
+}

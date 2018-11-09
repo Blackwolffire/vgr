@@ -8,5 +8,6 @@ int main(int argc, char *argv[])
     struct game_state g_st;
     init_sdl(&g_st);
     SDL_Delay(1024);
+    free_sdl(&g_st);
     return 0;
 }
