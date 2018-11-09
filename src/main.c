@@ -1,5 +1,6 @@
 # include <SDL.h>
 # include "engine.h"
+# include "graphical_engine.h"
 
 int main(int argc, char *argv[])
 {
