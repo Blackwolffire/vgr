@@ -36,7 +36,12 @@ struct game_state
 {
     SDL_Window *window;
     SDL_Renderer *renderer;
-};
+
+    //struct player;
+    struct game_object *l_go_ent;
+    struct game_object *l_go_dec;
+    unsigned int go_tick;
+}
 
 struct vec2 vadd(struct vec2 a, struct vec2 b);
 struct vec2 vsub(struct vec2 a, struct vec2 b);
