@@ -3,7 +3,10 @@
 
 int main(int argc, char *argv[])
 {
-    game_state g_st;
-    init_sdl(g_st);
+    if (!argc || !argv)
+        return 1;
+    struct game_state g_st;
+    init_sdl(&g_st);
+    SDL_Delay(1024);
     return 0;
 }
