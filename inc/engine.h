@@ -11,6 +11,14 @@ struct vec2
     float y;
 };
 
+enum entity
+{
+    DECOR,
+    PLAYER,
+    ENNEMY,
+    PROJECTILE
+};
+
 struct game_object
 {
     SDL_Rect gpos;
@@ -18,6 +26,10 @@ struct game_object
     struct vec2 pos;
     struct vec2 speed;
     char isupdate;
+    int life;
+    enum ENTITY type;
+
+    struct game_object *next;
 };
 
 struct game_state
