@@ -1,6 +1,6 @@
 #include "graphical_engine.h"
 
-void init_sdl(game_state *g_st)
+void init_sdl(struct game_state *g_st)
 {
     SDL_Window *window = NULL;
     SDL_Renderer *renderer = NULL;
@@ -11,5 +11,5 @@ void init_sdl(game_state *g_st)
                               SDL_WINDOWPOS_UNDEFINED, 600, 400, 0);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     g_st->window = window;
-    g_st->rendere = renderer;
+    g_st->renderer = renderer;
 }
