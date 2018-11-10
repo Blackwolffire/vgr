@@ -1,7 +1,7 @@
 #include "graphical_engine.h"
 #include <SDL_image.h>
 
-void anim(struct game_state *ga_st)
+static void anim(struct game_state *ga_st)
 {
     IMG_Init(IMG_INIT_PNG);
     SDL_Surface *image = IMG_Load("./ressources/Sprites/Animation.png");
@@ -13,7 +13,7 @@ void anim(struct game_state *ga_st)
     {
         SDL_RenderClear(ga_st->renderer);
         SDL_Rect srcrect = {(i%8)*50, 0,50,50};
-        SDL_Rect dstrect = {10,10,50,50};
+        SDL_Rect dstrect = {10+(i*5),10,50,50};
         SDL_RenderCopy(ga_st->renderer, texture, &srcrect, &dstrect);
         SDL_RenderPresent(ga_st->renderer);
         SDL_Delay(70);
@@ -22,6 +22,12 @@ void anim(struct game_state *ga_st)
     IMG_Quit();
     SDL_DestroyTexture(texture);
     SDL_FreeSurface(image);
+}
+
+void update_graphic(struct game_state *ga_st)
+{
+    if (ga_st)
+        return;
 }
 
 void init_sdl(struct game_state *ga_st)
