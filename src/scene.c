@@ -6,7 +6,7 @@ int game_loop(struct game_state *ga_st)
 {
     unsigned int before = SDL_GetTicks();
     unsigned int after;
-
+    load_textures(ga_st);
     while (1)
     {
         if (input_update(ga_st))

@@ -11,4 +11,14 @@ void player_jump(struct player *player)
 void player_run(struct player *player, char direction)
 {
     player->go->speed.x = direction * PLAYER_SPEED;
+    if (direction == 0)
+    {
+        player->go->animation = 0;
+        player->go->frame = 0;
+    }
+    else
+    {
+        player->go->animation = 1;
+        player->go->frame = (player->go->frame + 1) % 7;
+    }
 }
