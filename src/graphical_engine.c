@@ -1,24 +1,22 @@
 #include "graphical_engine.h"
-
+#include <SDL_image.h>
+/*
 static void print(struct game_state *ga_st)
 {
     SDL_Surface *pSprite = SDL_LoadBMP("./ressources/OrOS9.bmp");
-
     SDL_SetRenderDrawColor(ga_st->renderer, 128, 43, 226, 255);
     SDL_RenderClear(ga_st->renderer);
     SDL_RenderPresent(ga_st->renderer);
 
-    if ( pSprite )
+    if (pSprite)
     {
         SDL_Texture* pTexture = SDL_CreateTextureFromSurface(ga_st->renderer,pSprite);
         if ( pTexture )
         {
             SDL_Rect dest = { 640/2 - pSprite->w/2,480/2 - pSprite->h/2, pSprite->w, pSprite->h};
             SDL_RenderCopy(ga_st->renderer,pTexture,NULL,&dest);
-            
             SDL_RenderPresent(ga_st->renderer);
             SDL_Delay(2048);
-            
             SDL_DestroyTexture(pTexture);
         }
         else
@@ -34,7 +32,21 @@ static void print(struct game_state *ga_st)
     }
     SDL_RenderClear(ga_st->renderer);
     SDL_RenderPresent(ga_st->renderer);
+}
+*/
+void anim(struct game_state *ga_st)
+{
+    IMG_Init(IMG_INIT_PNG);
+    SDL_Surface *image = IMG_Load("./ressources/Anim.png");
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(ga_st->renderer, image);
 
+    SDL_SetRenderDrawColor(ga_st->renderer, 128, 43, 226, 255);
+    SDL_RenderClear(ga_st->renderer);
+    SDL_RenderPresent(ga_st->renderer);
+
+    IMG_Quit();
+    SDL_DestroyTexture(texture);
+    SDL_FreeSurface(image);
 }
 
 void init_sdl(struct game_state *ga_st)
@@ -54,7 +66,7 @@ void init_sdl(struct game_state *ga_st)
     ga_st->window = window;
     ga_st->renderer = renderer;
 
-    print(ga_st);
+    anim(ga_st);
 }
 
 void free_sdl(struct game_state *ga_st)
