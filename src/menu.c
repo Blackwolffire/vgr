@@ -44,8 +44,9 @@ void manage_update(enum selec selec, struct game_state *ga_st, int enter)
     //SDL_RenderClear(ga_st->renderer);
     //pos_selec=pos_selec;
     //SDL_RenderFillRect(ga_st->renderer, &pos_selec);
-    SDL_RenderCopy(ga_st->renderer, ga_st->texture, NULL, &pos_bg);
+    SDL_RenderCopy(ga_st->renderer, ga_st->texture, NULL, NULL);
     SDL_RenderPresent(ga_st->renderer);
+    SDL_RenderClear(ga_st->renderer);
 }
 
 void init_sdl_tmp(struct game_state *ga_st)
@@ -71,7 +72,7 @@ void init_sdl_tmp(struct game_state *ga_st)
         warnx("pb renderer");
         exit(1);
     }
-    bg = IMG_Load("resources/background_menu_3.png");
+    bg = IMG_Load("resources/background_menu_3_names.png");
     if (!bg)
     {
         warnx("pb image");
@@ -90,7 +91,7 @@ void init_sdl_tmp(struct game_state *ga_st)
     ga_st->texture = text;
     ga_st->surface = bg;
 
-    SDL_Rect pos_bg;
+    /*SDL_Rect pos_bg;
     pos_bg.x = 0;
     pos_bg.y = 0;
     pos_bg.w = ga_st->surface->w;
@@ -98,7 +99,7 @@ void init_sdl_tmp(struct game_state *ga_st)
     SDL_RenderCopy(ga_st->renderer, ga_st->texture, NULL, &pos_bg);
 
     SDL_RenderPresent(ga_st->renderer);
-    SDL_RenderClear(ga_st->renderer);
+    SDL_RenderClear(ga_st->renderer);*/
 }
 
 
@@ -113,7 +114,7 @@ void menu(struct game_state *ga_st)
     //while (state == 1)
     //{
     // SDL_WaitEvent(&event);
-    //manage_update(selec, ga_st, 0);
+    manage_update(selec, ga_st, 0);
     perform_selec(PLAY, ga_st);
     //while (SDL_PollEvent(&event))
     //{
