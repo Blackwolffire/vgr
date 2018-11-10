@@ -37,6 +37,8 @@ static void game_state_init(struct game_state *ga_st)
 {
     ga_st->l_go_ent = NULL;
     ga_st->l_go_dec = NULL;
+    ga_st->go_tick = 0;
+    ga_st->ph_up_tick = 0;
 }
 
 static void load_go(struct game_state *ga_st, int x, int y, char type)
