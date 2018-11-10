@@ -7,7 +7,6 @@ enum selec
 {
     PLAY,
     INSTRUCTIONS,
-    SCORES,
     QUIT,
     COPYRIGHT
 };
