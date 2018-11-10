@@ -3,6 +3,8 @@
 
 #include "game_object.h"
 
+#define PLAYER_LIFE 1000
+
 struct player
 {
     struct game_object *go;

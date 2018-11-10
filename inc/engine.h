@@ -33,4 +33,7 @@ struct game_state
 struct vec2 vadd(struct vec2 a, struct vec2 b);
 struct vec2 vsub(struct vec2 a, struct vec2 b);
 
+void go_ent_list_add(struct game_state *ga_st, struct game_object *go);
+void go_dec_list_add(struct game_state *ga_st, struct game_object *go);
+
 #endif /* ! ENGINE_H */
