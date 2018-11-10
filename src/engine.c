@@ -5,6 +5,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include "engine.h"
+#include "constant_sprite.h"
 
 struct vec2 vadd(struct vec2 a, struct vec2 b)
 {
@@ -32,6 +33,12 @@ void go_dec_list_add(struct game_state *ga_st, struct game_object *go)
     ga_st->l_go_dec = go;
 }
 
+static void game_state_init(struct game_state *ga_st)
+{
+    ga_st->l_go_ent = NULL;
+    ga_st->l_go_dec = NULL;
+}
+
 static void load_go(struct game_state *ga_st, int x, int y, char type)
 {
     struct game_object *go = malloc(sizeof(struct game_object));
@@ -44,20 +51,22 @@ static void load_go(struct game_state *ga_st, int x, int y, char type)
 
     if (type == '1')
     {
-        ga_st->player->go = go;
+        ga_st->player.go = go;
         go->life = PLAYER_LIFE;
         go->type = PLAYER;
         go_ent_list_add(ga_st, go);
         go->gpos.w = PLAYER_WIDTH;
         go->gpos.h = PLAYER_HEIGHT;
     }
-    if (type == '3')
+    else if (type == '3')
     {
         go->type = DECOR;
         go_dec_list_add(ga_st, go);
         go->gpos.w = FLOOR_WIDTH;
         go->gpos.h = FLOOR_HEIGHT;
     }
+    else
+        free(go);
 }
 
 void load_level(struct game_state *ga_st, char *fin)
@@ -67,6 +76,8 @@ void load_level(struct game_state *ga_st, char *fin)
     int width;
     int height;
     struct stat buf;
+
+    game_state_init(ga_st);
 
     fd = open(fin, O_RDONLY);
     if (fd == -1)
@@ -89,7 +100,7 @@ void load_level(struct game_state *ga_st, char *fin)
         for (int j = 0; j < width - 1; ++j)
         {
             if (data[i * width + j] != '0')
-                load_go(ga_st, y * 16, i * 16, data[i * width + j]);
+                load_go(ga_st, j * 16, i * 16, data[i * width + j]);
         }
     }
 

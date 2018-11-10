@@ -4,18 +4,18 @@ LDFLAGS = -L. #-lasan
 LDLIBS = -lm $(shell sdl2-config --libs) -lSDL2_image
 VPATH = src
 
-RT_NAME = test
-RT_OBJS = graphical_engine.o main.o
+NAME = test
+OBJS = graphical_engine.o main.o engine.o physical_engine.o
 
-all: $(RT_NAME)
+all: $(NAME)
 
-$(RT_NAME): $(RT_OBJS)
-	$(CC) $(RT_OBJS) $(LDFLAGS) $(LDLIBS) -o $@
+$(NAME): $(OBJS)
+	$(CC) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $@
 proper:
-	$(RM) $(RT_OBJS)
+	$(RM) $(OBJS)
 
 clean: proper
-	$(RM) $(RT_NAME)
+	$(RM) $(NAME)
 
-.PHONY: all $(RT_NAME) proper clean
+.PHONY: all $(NAME) proper clean
 

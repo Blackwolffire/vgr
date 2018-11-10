@@ -4,7 +4,8 @@
 static void collision(struct game_state *ga_st, struct game_object *go,
                       struct game_object *dec)
 {
-    ;
+    if (!ga_st || !go || !dec)
+        return;
 }
 
 static void update_speed(struct game_object *go)
@@ -21,6 +22,8 @@ static void update_speed(struct game_object *go)
 
 static void ph_go_dec_update(struct game_state *ga_st, struct game_object *go)
 {
+    if (!ga_st)
+        return;
     char whrx = 0. < go->target.x;
     char whry = 0. < go->target.y;
     struct vec2 tmp;
@@ -52,8 +55,8 @@ static void ph_go_ent_update(struct game_state *ga_st, struct game_object *go,
     struct game_object *dec = ga_st->l_go_dec;
     struct vec2 pos = vadd(go->pos, go->speed);
 
-    if (go->speed.x || go.speed.y)
-        go->isupadte = 1;
+    if (go->speed.x || go->speed.y)
+        go->isupdate = 1;
 
     while (dec)
     {
@@ -109,7 +112,6 @@ static void ph_go_ent_update(struct game_state *ga_st, struct game_object *go,
 
 static void ph_update(struct game_state *ga_st, char up_speed)
 {
-    unsigned int tick;
     struct game_object *go = ga_st->l_go_ent;
 
     while (go)
@@ -120,7 +122,7 @@ static void ph_update(struct game_state *ga_st, char up_speed)
     go = ga_st->l_go_dec;
     while (go)
     {
-        ph_go_dec_update(ga_st, go,);
+        ph_go_dec_update(ga_st, go);
         go = go->next;
     }
 }
