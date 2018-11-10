@@ -1,3 +1,4 @@
+#include <err.h>
 #include "graphical_engine.h"
 #include <SDL_image.h>
 
@@ -67,18 +68,43 @@ void init_sdl(struct game_state *ga_st)
 {
     SDL_Window *window = NULL;
     SDL_Renderer *renderer = NULL;
+    SDL_Surface *bg = NULL;
+    SDL_Texture *text = NULL;
 
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
-
+    IMG_Init(IMG_INIT_PNG);
     window = SDL_CreateWindow("Window", SDL_WINDOWPOS_UNDEFINED,
-            SDL_WINDOWPOS_UNDEFINED, 800, 600, 0);
+            SDL_WINDOWPOS_UNDEFINED, 600, 400, 0);
+    if (!window)
+    {
+        warnx("pb window");
+        exit(1);
+    }
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-
-    SDL_RenderClear(renderer);
-    SDL_RenderPresent(renderer);
+    if (!renderer)
+    {
+        warnx("pb renderer");
+        exit(1);
+    }
+    bg = IMG_Load("resources/background_menu_3_names.png");
+    if (!bg)
+    {
+        warnx("pb image");
+        exit(1);
+    }
+    text = SDL_CreateTextureFromSurface(renderer, bg);
+    if (!text)
+    {
+        printf("%s\n", SDL_GetError());
+        warnx("pb text");
+        exit(1);
+    }
 
     ga_st->window = window;
     ga_st->renderer = renderer;
+    ga_st->texture = text;
+    ga_st->surface = bg;
+
 }
 
 void free_sdl(struct game_state *ga_st)

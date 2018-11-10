@@ -102,7 +102,7 @@ void init_sdl_tmp(struct game_state *ga_st)
 
 void menu(struct game_state *ga_st)
 {
-    init_sdl_tmp(ga_st);
+    init_sdl(ga_st);
     SDL_Event event;
     enum selec selec = 1;
     int state = 1;
