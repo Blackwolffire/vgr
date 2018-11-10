@@ -25,26 +25,28 @@ void manage_update(enum selec selec, struct game_state *ga_st, int enter)
     pos_bg.w = ga_st->surface->w;
     pos_bg.h = ga_st->surface->h;
 
-    /*SDL_SetRenderDrawColor(ga_st->renderer, 0, 43, 226, 0);
-      SDL_Rect pos_selec;
-      pos_selec.w = 25;
-      pos_selec.h = 25;
-      pos_selec.x = 700;
+    SDL_SetRenderDrawColor(ga_st->renderer, 0, 43, 226, 0);
+    SDL_Rect pos_selec;
+    pos_selec.w = 15;
+    pos_selec.h = 15;
+    pos_selec.x = 398;
 
-      if (selec == PLAY)
-      pos_selec.y = 165;
-      if (selec == INSTRUCTIONS)
-      pos_selec.y = 217;
-      if (selec == QUIT)
-      pos_selec.y = 277;
-      else
-      pos_selec.y = 333;
+    if (selec == 0)
+        pos_selec.y = 107;
+    else if (selec == 1)
+        pos_selec.y = 150;
+    else if (selec == 2)
+        pos_selec.y = 187;
+    else
+        pos_selec.y = 225;
 
-*/
+    printf("%d  %d\n", pos_selec.x, pos_selec.y);
+
     //SDL_RenderClear(ga_st->renderer);
     //pos_selec=pos_selec;
-    //SDL_RenderFillRect(ga_st->renderer, &pos_selec);
     SDL_RenderCopy(ga_st->renderer, ga_st->texture, NULL, NULL);
+    SDL_RenderFillRect(ga_st->renderer, &pos_selec);
+
     SDL_RenderPresent(ga_st->renderer);
     SDL_RenderClear(ga_st->renderer);
 }
@@ -90,16 +92,6 @@ void init_sdl_tmp(struct game_state *ga_st)
     ga_st->renderer = renderer;
     ga_st->texture = text;
     ga_st->surface = bg;
-
-    /*SDL_Rect pos_bg;
-    pos_bg.x = 0;
-    pos_bg.y = 0;
-    pos_bg.w = ga_st->surface->w;
-    pos_bg.h = ga_st->surface->h;
-    SDL_RenderCopy(ga_st->renderer, ga_st->texture, NULL, &pos_bg);
-
-    SDL_RenderPresent(ga_st->renderer);
-    SDL_RenderClear(ga_st->renderer);*/
 }
 
 
@@ -114,7 +106,7 @@ void menu(struct game_state *ga_st)
     //while (state == 1)
     //{
     // SDL_WaitEvent(&event);
-    manage_update(selec, ga_st, 0);
+    manage_update(4, ga_st, 0);
     perform_selec(PLAY, ga_st);
     //while (SDL_PollEvent(&event))
     //{
