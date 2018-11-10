@@ -1,13 +1,18 @@
 #include <err.h>
 #include "menu.h"
+#include "scene.h"
 
 void perform_selec(enum selec selec, struct game_state *ga_st, int *state)
 {
     ga_st = ga_st;
-    if (selec == QUIT)
+    if (selec == 3)
     {
         *state = 0;
         SDL_Quit();
+    }
+    else if (selec == 0)
+    {
+        game_loop(ga_st);
     }
 
     else
@@ -98,7 +103,7 @@ void menu(struct game_state *ga_st)
 {
     init_sdl_tmp(ga_st);
     SDL_Event event;
-    enum selec selec = PLAY;
+    enum selec selec = 0;
     int state = 1;
     int enter_selec = 0;
 
@@ -118,14 +123,14 @@ void menu(struct game_state *ga_st)
         else if (key[SDL_SCANCODE_UP])
         {
             if (selec == 0)
-                selec = 4;
+                selec = 3;
             else
                 selec -= 1;
         }
 
         else if (key[SDL_SCANCODE_DOWN])
         {
-            if (selec == 4)
+            if (selec == 3)
                 selec = 0;
             else
                 selec += 1;
