@@ -2,43 +2,16 @@
 #define ENGINE_H
 
 #include <SDL.h>
+#include "player.h"
 
 #define GRAVITY 9.81
-
-struct vec2
-{
-    float x;
-    float y;
-};
-
-enum entity
-{
-    DECOR,
-    PLAYER,
-    ENNEMY,
-    PROJECTILE
-};
-
-struct game_object
-{
-    SDL_Rect gpos;
-    SDL_Rect gprev;
-    struct vec2 pos;
-    struct vec2 speed;
-    struct vec2 target;
-    char isupdate;
-    int life;
-    enum entity type;
-
-    struct game_object *next;
-};
 
 struct game_state
 {
     SDL_Window *window;
     SDL_Renderer *renderer;
 
-    //struct player;
+    struct player player;
     struct game_object *l_go_ent;
     struct game_object *l_go_dec;
     unsigned int go_tick;

@@ -25,6 +25,8 @@ static void ph_go_dec_update(struct game_state *ga_st, struct game_object *go)
     char whry = 0. < go->target.y;
     struct vec2 tmp;
 
+    if (!go->target.x && !go->target.y)
+        return;
     tmp = vsub(go->target, go->speed);
     if ((whrx && tmp.x < 0.) || (!whrx && tmp.x > 0.))
     {
@@ -38,6 +40,7 @@ static void ph_go_dec_update(struct game_state *ga_st, struct game_object *go)
         go->target.y = 0.;
         go->speed.y = 0.;
     }
+    go->isupdate = 1;
 }
 
 static void ph_go_ent_update(struct game_state *ga_st, struct game_object *go,
@@ -122,7 +125,7 @@ static void ph_update(struct game_state *ga_st, char up_speed)
     }
 }
 
-void physical_upadte(struct game_state *ga_st)
+void physical_update(struct game_state *ga_st)
 {
     char up_speed = 0;
     unsigned int tick;
