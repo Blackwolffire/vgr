@@ -41,13 +41,11 @@ void load_textures(struct game_state *ga_st)
     tabTex[1].type = DECOR;
     SDL_FreeSurface(img2);
     ga_st->tab = tabTex;
-    return tabTex;
+    return;
 }
 
 void update_graphic(struct game_state *ga_st)
 {
-    if (!ga_st)
-        return;
     load_textures(ga_st);
     struct game_object *current = ga_st->l_go_dec;
     for (; current != NULL; current = current->next)
