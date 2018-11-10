@@ -20,7 +20,7 @@ void load_textures(struct game_state *ga_st)
     SDL_Texture *tex_pro = SDL_CreateTextureFromSurface(ga_st->renderer, pro);
     tabTex[3].tex = tex_pro;
     tabTex[3].type = PROJECTILE;
-    SDL_Surface *img = IMG_Load("./resources/Sprites/Player2.png");
+    SDL_Surface *img = IMG_Load("./resources/Sprites/Player.png");
     SDL_Texture *tex = SDL_CreateTextureFromSurface(ga_st->renderer, img);
     tabTex[size - 2].tex = tex;
     tabTex[size - 2].type = DECOR;
