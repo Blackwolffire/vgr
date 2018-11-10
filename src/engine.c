@@ -48,11 +48,15 @@ static void load_go(struct game_state *ga_st, int x, int y, char type)
         go->life = PLAYER_LIFE;
         go->type = PLAYER;
         go_ent_list_add(ga_st, go);
+        go->gpos.w = PLAYER_WIDTH;
+        go->gpos.h = PLAYER_HEIGHT;
     }
     if (type == '3')
     {
         go->type = DECOR;
         go_dec_list_add(ga_st, go);
+        go->gpos.w = FLOOR_WIDTH;
+        go->gpos.h = FLOOR_HEIGHT;
     }
 }
 
