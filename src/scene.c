@@ -16,6 +16,7 @@ int game_loop(struct game_state *ga_st)
         if (before + 5 <= (after = SDL_GetTicks()))
         {
             update_graphic(ga_st);
+            ga_st->player.go->frame = (ga_st->player.go->frame + 1) % 7;
             before = after;
         }
     }
