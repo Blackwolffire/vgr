@@ -103,7 +103,14 @@ static void ph_go_ent_update(struct game_state *ga_st, struct game_object *go,
         dec = dec->next;
     }
     if (!collid)
+    {
         go->pos = pos;
+        if (go->pos.y > ga_st->lv_h)
+        {
+            go_free(ga_st->l_go_ent, go);
+            return;
+        }
+    }
     if (up_speed)
         update_speed(go);
     if (floor_col)

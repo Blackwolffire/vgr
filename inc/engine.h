@@ -1,7 +1,6 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
-#include <SDL.h>
 #include "player.h"
 #include <SDL_image.h>
 

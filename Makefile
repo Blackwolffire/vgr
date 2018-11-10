@@ -5,7 +5,8 @@ LDLIBS = -lm $(shell sdl2-config --libs) -lSDL2_image
 VPATH = src
 
 NAME = test
-OBJS = graphical_engine.o main.o engine.o physical_engine.o
+OBJS = graphical_engine.o main.o engine.o physical_engine.o game_object.o \
+		scene.o
 
 all: $(NAME)
 

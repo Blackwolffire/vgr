@@ -84,7 +84,6 @@ void init_sdl(struct game_state *ga_st)
 
     ga_st->window = window;
     ga_st->renderer = renderer;
-    update_graphic(ga_st);
 }
 
 void free_sdl(struct game_state *ga_st)

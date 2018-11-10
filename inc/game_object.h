@@ -1,6 +1,7 @@
 #ifndef GAME_OBJECT_H
 #define GAME_OBJECT_H
 
+#include <SDL.h>
 #include "vec2.h"
 
 enum go_type
@@ -23,5 +24,8 @@ struct game_object
 
     struct game_object *next;
 };
+
+void go_free(struct game_object *list, struct game_object *go);
+void go_list_free(struct game_object *go);
 
 #endif /* ! GAME_OBJECT_H */

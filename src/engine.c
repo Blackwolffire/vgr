@@ -7,8 +7,6 @@
 #include "engine.h"
 #include "constant_sprite.h"
 
-#include <stdio.h>
-
 struct vec2 vadd(struct vec2 a, struct vec2 b)
 {
     a.x += b.x;
@@ -51,7 +49,6 @@ static void load_go(struct game_state *ga_st, int x, int y, char type)
     go->speed.y = 0.;
     go->isupdate = 1;
 
-    printf("type: %c x %.2f y %.2f\n", type, go->pos.x, go->pos.y);
     if (type == '1')
     {
         ga_st->player.go = go;
@@ -98,7 +95,6 @@ void load_level(struct game_state *ga_st, char *fin)
     height = buf.st_size / width;
     ga_st->lv_w = width * 16;
     ga_st->lv_h = height * 16;
-    printf("width %d height %d\n", width, height);
 
     for (int i = 0; i < height; ++i)
     {
@@ -112,18 +108,6 @@ void load_level(struct game_state *ga_st, char *fin)
 
     munmap(data, buf.st_size);
     close(fd);
-}
-
-static void go_list_free(struct game_object *go)
-{
-    struct game_object *torm;
-
-    while (go)
-    {
-        torm = go;
-        go = go->next;
-        free(torm);
-    }
 }
 
 void free_level(struct game_state *ga_st)
