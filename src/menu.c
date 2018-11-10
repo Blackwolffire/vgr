@@ -43,9 +43,6 @@ void manage_update(enum selec selec, struct game_state *ga_st, int enter, int *s
         pos_selec.y = 225;
 
     printf("%d  %d\n", pos_selec.x, pos_selec.y);
-
-    //SDL_RenderClear(ga_st->renderer);
-    //pos_selec=pos_selec;
     SDL_RenderCopy(ga_st->renderer, ga_st->texture, NULL, NULL);
     SDL_RenderFillRect(ga_st->renderer, &pos_selec);
 
@@ -108,10 +105,6 @@ void menu(struct game_state *ga_st)
     while (state == 1)
     {
         SDL_WaitEvent(&event);
-        //manage_update(4, ga_st, 0);
-        //perform_selec(PLAY, ga_st);
-        //while (SDL_PollEvent(&event))
-        //{
         if (event.type == SDL_QUIT)
         {
             state = 0;
@@ -139,7 +132,6 @@ void menu(struct game_state *ga_st)
         }
         manage_update(selec, ga_st, enter_selec, &state);
         enter_selec = 0;
-        //}
     }
 
     SDL_DestroyTexture(ga_st->texture);
