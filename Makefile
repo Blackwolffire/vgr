@@ -5,7 +5,7 @@ LDLIBS = -lm $(shell sdl2-config --libs) -lSDL2_image
 VPATH = src
 
 RT_NAME = test
-RT_OBJS = graphical_engine.o  menu.o main.o
+RT_OBJS = graphical_engine.o main.o
 
 all: $(RT_NAME)
 

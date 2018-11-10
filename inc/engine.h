@@ -7,6 +7,13 @@
 
 #define GRAVITY 9.81
 
+struct tabTex
+{
+    SDL_Texture *tex;
+    enum go_type type;
+    :w
+};
+
 struct game_state
 {
     SDL_Window *window;
@@ -18,6 +25,7 @@ struct game_state
     struct game_object *l_go_dec;
     unsigned int go_tick;
     unsigned int ph_up_tick;
+    struct tabTex *tab;
 };
 
 struct vec2 vadd(struct vec2 a, struct vec2 b);

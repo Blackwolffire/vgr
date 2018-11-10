@@ -25,13 +25,7 @@ static void anim(struct game_state *ga_st) // DELETE ME
     SDL_FreeSurface(image);
 }
 */
-struct tabTex
-{
-    SDL_Texture *tex;
-    enum go_type type;
-};
-
-struct tabTex* load_textures(struct game_state *ga_st)
+void load_textures(struct game_state *ga_st)
 {
     int size = 2;
     struct tabTex *tabTex = malloc(sizeof(struct tabTex) * size);
@@ -46,6 +40,7 @@ struct tabTex* load_textures(struct game_state *ga_st)
     tabTex[1].tex = tex2;
     tabTex[1].type = DECOR;
     SDL_FreeSurface(img2);
+    ga_st->tab = tabTex;
     return tabTex;
 }
 
@@ -53,13 +48,13 @@ void update_graphic(struct game_state *ga_st)
 {
     if (!ga_st)
         return;
-    struct tabTex *tabTex = load_textures(ga_st);
+    load_textures(ga_st);
     struct game_object *current = ga_st->l_go_dec;
     for (; current != NULL; current = current->next)
     {
         SDL_Rect srcrect = {0,0,16,16};
         SDL_Rect dstrect = {current->pos.x, current->pos.y, 16,16};
-        SDL_RenderCopy(ga_st->renderer, tabTex[1].tex, &srcrect, &dstrect);
+        SDL_RenderCopy(ga_st->renderer, ga_st->tab[1].tex, &srcrect, &dstrect);
         SDL_RenderPresent(ga_st->renderer);
         SDL_Delay(70);
     }
