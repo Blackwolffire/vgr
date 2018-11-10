@@ -3,7 +3,7 @@
 
 static void load_textures(struct game_state *ga_st)
 {
-    int size = 5;
+    int size = 4;
     struct tabTex *tabTex = malloc(sizeof(struct tabTex) * size);
     for (int i = 0; i < 2; i++)
     {
@@ -17,12 +17,12 @@ static void load_textures(struct game_state *ga_st)
     }
     SDL_Surface *img = IMG_Load("./resources/Sprites/Player2.png");
     SDL_Texture *tex = SDL_CreateTextureFromSurface(ga_st->renderer, img);
-    tabTex[3].tex = tex;
-    tabTex[3].type = DECOR;
+    tabTex[size - 2].tex = tex;
+    tabTex[size - 2].type = DECOR;
     SDL_Surface *image = IMG_Load("./resources/Backgrounds/background.png");
     SDL_Texture *textur = SDL_CreateTextureFromSurface(ga_st->renderer, image);
-    tabTex[4].tex = textur;
-    tabTex[4].type = DECOR;
+    tabTex[size - 1].tex = textur;
+    tabTex[size - 1].type = DECOR;
     SDL_FreeSurface(img);
     ga_st->tab = tabTex;
     return;
@@ -33,7 +33,7 @@ void update_graphic(struct game_state *ga_st)
     IMG_Init(IMG_INIT_PNG);
     load_textures(ga_st);
 
-    SDL_RenderCopy(ga_st->renderer, ga_st->tab[4].tex, NULL, NULL);
+    SDL_RenderCopy(ga_st->renderer, ga_st->tab[3].tex, NULL, NULL);
     struct game_object *cur = ga_st->l_go_dec;
     for (; cur != NULL; cur = cur->next)
     {
@@ -49,11 +49,12 @@ void update_graphic(struct game_state *ga_st)
         cur->animation = 1;
         SDL_Rect srcrect = {cur->frame * 66, cur->animation * 66, 66, 66};
         SDL_Rect dstrect = {cur->pos.x, cur->pos.y, 66,66};
-        SDL_RenderCopy(ga_st->renderer, ga_st->tab[3].tex, &srcrect, &dstrect);
+        SDL_RenderCopy(ga_st->renderer, ga_st->tab[2].tex, &srcrect, &dstrect);
     }
 
     SDL_RenderPresent(ga_st->renderer);
     SDL_RenderClear(ga_st->renderer);
+    SDL_Delay(25);
 }
 
 void init_sdl(struct game_state *ga_st)
