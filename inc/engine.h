@@ -3,6 +3,7 @@
 
 #include <SDL.h>
 #include "player.h"
+#include <SDL_image.h>
 
 #define GRAVITY 9.81
 
