@@ -11,7 +11,6 @@ struct tabTex
 {
     SDL_Texture *tex;
     enum go_type type;
-    :w
 };
 
 struct game_state
