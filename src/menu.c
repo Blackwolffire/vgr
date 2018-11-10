@@ -12,7 +12,9 @@ void perform_selec(enum selec selec, struct game_state *ga_st, int *state)
     }
     else if (selec == 0)
     {
+        load_level(ga_st, "resources/maps/lv0.map");
         game_loop(ga_st);
+        free_level(ga_st);
     }
 
     else
@@ -95,8 +97,5 @@ void menu(struct game_state *ga_st)
         manage_update(selec, ga_st, enter_selec, &state);
         enter_selec = 0;
     }
-
-    SDL_DestroyTexture(ga_st->texture);
-    SDL_FreeSurface(ga_st->surface);
-
+    free_sdl(ga_st);
 }

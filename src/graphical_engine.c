@@ -109,8 +109,9 @@ void init_sdl(struct game_state *ga_st)
 
 void free_sdl(struct game_state *ga_st)
 {
+    SDL_DestroyTexture(ga_st->texture);
+    SDL_FreeSurface(ga_st->surface);
     SDL_DestroyWindow(ga_st->window);
     SDL_DestroyRenderer(ga_st->renderer);
     IMG_Quit();
-    SDL_Quit();
 }
