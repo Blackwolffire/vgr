@@ -54,7 +54,6 @@ void update_graphic(struct game_state *ga_st)
 
     SDL_RenderPresent(ga_st->renderer);
     SDL_RenderClear(ga_st->renderer);
-    SDL_Delay(25);
 }
 
 void init_sdl(struct game_state *ga_st)

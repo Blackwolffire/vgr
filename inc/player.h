@@ -6,7 +6,7 @@
 #define PLAYER_LIFE 1000
 #define PLAYER_WIDTH 50
 #define PLAYER_HEIGHT 50
-#define PLAYER_JUMP 50
+#define PLAYER_JUMP 35
 #define PLAYER_SPEED 10
 
 struct player
