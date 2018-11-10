@@ -11,6 +11,7 @@ struct game_state
 {
     SDL_Window *window;
     SDL_Renderer *renderer;
+    SDL_Surface *surface;
 
     struct player player;
     struct game_object *l_go_ent;
