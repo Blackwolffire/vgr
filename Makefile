@@ -6,7 +6,7 @@ VPATH = src
 
 NAME = test
 OBJS = graphical_engine.o main.o engine.o physical_engine.o game_object.o \
-		scene.o
+		scene.o menu.o
 
 all: $(NAME)
 

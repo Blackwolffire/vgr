@@ -1,20 +1,10 @@
 #include <err.h>
 #include "menu.h"
 
-void print_background_menu(struct game_state *ga_st)
-{
-
-    SDL_RenderCopy(ga_st->renderer, text, NULL, &pos_bg);
-    SDL_RenderPresent(ga_st->renderer);
-    //SDL_Delay(1000);
-    //SDL_DestroyTexture(text);
-
-    /*SDL_RenderClear(ga_st->renderer);
-      SDL_RenderPresent(ga_st->renderer);*/
-}
-
 void perform_selec(enum selec selec, struct game_state *ga_st)
 {
+    selec = selec;
+    ga_st = ga_st;
     SDL_Quit();
 }
 
@@ -28,10 +18,10 @@ void manage_update(enum selec selec, struct game_state *ga_st, int enter)
     SDL_Rect pos_bg;
     pos_bg.x = 0;
     pos_bg.y = 0;
-    pos_bg.w = ga_st->suface->w;
+    pos_bg.w = ga_st->surface->w;
     pos_bg.h = ga_st->surface->h;
 
-    SDL_SetRenderDrawColor(renderer, 128, 43, 226, 255);
+    SDL_SetRenderDrawColor(ga_st->renderer, 128, 43, 226, 255);
     SDL_Rect pos_selec;
     pos_selec.w = 25;
     pos_selec.h = 25;
@@ -46,7 +36,7 @@ void manage_update(enum selec selec, struct game_state *ga_st, int enter)
     else
         pos_selec.y = 333;
 
-    SDL_RenderFillRect(renderer, &pos_selec);
+    SDL_RenderFillRect(ga_st->renderer, &pos_selec);
     SDL_RenderCopy(ga_st->renderer, ga_st->texture, NULL, &pos_bg);
     SDL_RenderPresent(ga_st->renderer);
 }
@@ -60,8 +50,7 @@ void init_sdl_tmp(struct game_state *ga_st)
 
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 
-    window = S
-        DL_CreateWindow("Window", SDL_WINDOWPOS_UNDEFINED,
+    window = SDL_CreateWindow("Window", SDL_WINDOWPOS_UNDEFINED,
             SDL_WINDOWPOS_UNDEFINED, 600, 400, 0);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     bg = IMG_Load("ressources/background_menu_3_names.png");
@@ -72,7 +61,7 @@ void init_sdl_tmp(struct game_state *ga_st)
     ga_st->window = window;
     ga_st->renderer = renderer;
     ga_st->texture = text;
-    ga_st->suface = bg;
+    ga_st->surface = bg;
 }
 
 
@@ -94,10 +83,10 @@ void menu(struct game_state *ga_st)
             state = 0;
         const Uint8 *key = SDL_GetKeyboardState(NULL);
 
-        if (key[SDL_SCANCODE_ENTER])
+        if (key[SDL_SCANCODE_RETURN])
             enter_selec = 1;
 
-        else if (key[SDLK_SCANCODE_UP])
+        else if (key[SDL_SCANCODE_UP])
         {
             if (selec == 0)
                 selec = COPYRIGHT;
@@ -105,7 +94,7 @@ void menu(struct game_state *ga_st)
                 selec -= 1;
         }
 
-        else if (key[SDLK_SCANCODE_DOWN])
+        else if (key[SDL_SCANCODE_DOWN])
         {
             if (selec == 4)
                 selec = PLAY;
@@ -117,7 +106,7 @@ void menu(struct game_state *ga_st)
         // }
     }
 
-    SDL_DestroyTexture(ga_st->text);
-    SDL_FreeSurface(bg);
+    SDL_DestroyTexture(ga_st->texture);
+    SDL_FreeSurface(ga_st->surface);
 
 }
