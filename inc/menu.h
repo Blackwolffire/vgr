@@ -11,6 +11,6 @@ enum selec
     COPYRIGHT
 };
 
-void init_sdl_tmp(struct game_state *ga_st);
+void menu(struct game_state *ga_st);
 
 #endif /* ! MENU_H */
