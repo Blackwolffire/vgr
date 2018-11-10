@@ -3,12 +3,7 @@
 
 void print_background_menu(struct game_state *ga_st)
 {
-    SDL_Rect pos_bg;
-    pos_bg.x = 0;
-    pos_bg.y = 0;
-    pos_bg.w = bg->w;
-    pos_bg.h = bg->h;
-
+    
     SDL_RenderCopy(ga_st->renderer, text, NULL, &pos_bg);
     SDL_RenderPresent(ga_st->renderer);
     //SDL_Delay(1000);
@@ -20,6 +15,23 @@ void print_background_menu(struct game_state *ga_st)
 
 void manage_update(enum selec selec, struct game_state *ga_st, int enter)
 {
+    if (enter == 1)
+    {
+        perform_selec(selec, ga_st);
+        return;
+    }
+    SDL_Rect pos_bg;
+    pos_bg.x = 0;
+    pos_bg.y = 0;
+    pos_bg.w = bg->w;
+    pos_bg.h = bg->h;
+
+
+    SDL_RenderCopy(ga_st->renderer, ga_st->texture, NULL, &pos);
+    SDL_RenderPresent(ga_st->renderer);
+}
+
+
 
 
 
