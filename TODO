@@ -1,0 +1,8 @@
+input:
+    usingPollevent:
+        if escape is pressed, return 2
+        if space is pressed, call player_jump(ga_st)
+    keyboardstate:
+        if D call player_run(ga_st, 1)
+        if A call player_run(ga_st, -1)
+        else call player_run(ga_st, 0)
