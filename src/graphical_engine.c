@@ -54,14 +54,18 @@ void update_graphic(struct game_state *ga_st)
     struct game_object *current = ga_st->l_go_dec;
     for (; current != NULL; current = current->next)
     {
-        SDL_Rect srcrect = {0,0,16,16};
+        SDL_Rect srcrect = {0.,0.,16,16};
         SDL_Rect dstrect = {current->pos.x, current->pos.y, 16,16};
-        SDL_RenderCopy(ga_st->renderer, ga_st->tab[0].tex, &srcrect, &dstrect);
-        SDL_RenderPresent(ga_st->renderer);
+        SDL_RenderCopy(ga_st->renderer, ga_st->tab[1].tex, &srcrect, &dstrect);
     }
     for (current = ga_st->l_go_ent; current != NULL; current = current->next)
-        continue;
-    SDL_Delay(70);
+    {
+        SDL_Rect srcrect = {0.,0.,50,50};
+        SDL_Rect dstrect = {current->pos.x, current->pos.y, 50,50};
+        SDL_RenderCopy(ga_st->renderer, ga_st->tab[3].tex, &srcrect, &dstrect);
+    }
+    SDL_RenderPresent(ga_st->renderer);
+    SDL_Delay(5550);
 }
 
 void init_sdl(struct game_state *ga_st)
@@ -72,7 +76,7 @@ void init_sdl(struct game_state *ga_st)
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 
     window = SDL_CreateWindow("Window", SDL_WINDOWPOS_UNDEFINED,
-            SDL_WINDOWPOS_UNDEFINED, 600, 400, 0);
+            SDL_WINDOWPOS_UNDEFINED, 800, 600, 0);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     SDL_RenderClear(renderer);
