@@ -25,7 +25,7 @@ static void anim(struct game_state *ga_st) // DELETE ME
     SDL_FreeSurface(image);
 }
 */
-void load_textures(struct game_state *ga_st)
+static void load_textures(struct game_state *ga_st)
 {
     int size = 2;
     struct tabTex *tabTex = malloc(sizeof(struct tabTex) * size);
