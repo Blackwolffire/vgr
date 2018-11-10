@@ -3,6 +3,15 @@
 
 #include "graphical_engine.h"
 
-void print_background_menu(struct game_state *ga_st);
+enum selec
+{
+    PLAY,
+    INSTRUCTIONS,
+    SCORES,
+    QUIT,
+    COPYRIGHT
+};
+
+void init_sdl_tmp(struct game_state *ga_st);
 
 #endif /* ! MENU_H */
