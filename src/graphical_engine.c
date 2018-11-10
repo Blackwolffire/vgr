@@ -39,7 +39,7 @@ static void load_textures(struct game_state *ga_st)
         tabTex[i].type = DECOR;
         SDL_FreeSurface(img);
     }
-    SDL_Surface *img = IMG_Load("./resources/Sprites/Player.png");
+    SDL_Surface *img = IMG_Load("./resources/Sprites/Player2.png");
     SDL_Texture *tex = SDL_CreateTextureFromSurface(ga_st->renderer, img);
     tabTex[3].tex = tex;
     tabTex[3].type = DECOR;
@@ -51,6 +51,12 @@ static void load_textures(struct game_state *ga_st)
 void update_graphic(struct game_state *ga_st)
 {
     load_textures(ga_st);
+    int i = 0;
+    int j = 0;
+    int w = 1;
+    while(1)
+    {
+    SDL_RenderClear(ga_st->renderer);
     struct game_object *current = ga_st->l_go_dec;
     for (; current != NULL; current = current->next)
     {
@@ -60,12 +66,23 @@ void update_graphic(struct game_state *ga_st)
     }
     for (current = ga_st->l_go_ent; current != NULL; current = current->next)
     {
-        SDL_Rect srcrect = {0.,0.,50,50};
-        SDL_Rect dstrect = {current->pos.x, current->pos.y, 50,50};
+        SDL_Rect srcrect = {j%7 * 66,66. * w,66,66};
+        SDL_Rect dstrect = {current->pos.x + i*5, current->pos.y, 66,66};
         SDL_RenderCopy(ga_st->renderer, ga_st->tab[3].tex, &srcrect, &dstrect);
     }
+    if (i<35)
+    {
+        i++;
+        j++;
+    }
+    else
+    {
+        j = 0;
+        w = 0;
+    }
     SDL_RenderPresent(ga_st->renderer);
-    SDL_Delay(5550);
+    SDL_Delay(75);
+    }
 }
 
 void init_sdl(struct game_state *ga_st)
