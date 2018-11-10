@@ -113,3 +113,21 @@ void load_level(struct game_state *ga_st, char *fin)
     munmap(data, buf.st_size);
     close(fd);
 }
+
+static void go_list_free(struct game_object *go)
+{
+    struct game_object *torm;
+
+    while (go)
+    {
+        torm = go;
+        go = go->next;
+        free(torm);
+    }
+}
+
+void free_level(struct game_state *ga_st)
+{
+    go_list_free(ga_st->l_go_ent);
+    go_list_free(ga_st->l_go_dec);
+}

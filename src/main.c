@@ -8,5 +8,6 @@ int main(void)
     init_sdl(&ga_st);
     SDL_Delay(2000);
     free_sdl(&ga_st);
+    free_level(&ga_st);
     return 0;
 }

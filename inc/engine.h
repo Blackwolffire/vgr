@@ -37,5 +37,6 @@ struct vec2 vsub(struct vec2 a, struct vec2 b);
 void go_ent_list_add(struct game_state *ga_st, struct game_object *go);
 void go_dec_list_add(struct game_state *ga_st, struct game_object *go);
 void load_level(struct game_state *ga_st, char *fin);
+void free_level(struct game_state *ga_st);
 
 #endif /* ! ENGINE_H */
