@@ -22,6 +22,9 @@ struct game_object
     int life;
     enum go_type type;
 
+    int frame;
+    int animation;
+
     struct game_object *next;
 };
 

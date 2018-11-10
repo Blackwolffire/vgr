@@ -62,6 +62,7 @@ void update_graphic(struct game_state *ga_st)
     for (; current != NULL; current = current->next)
     {
         current->frame = 0;
+        current->animation = 0;
         SDL_Rect srcrect = {0.,0.,16,16};
         SDL_Rect dstrect = {current->pos.x, current->pos.y, 16,16};
         SDL_RenderCopy(ga_st->renderer, ga_st->tab[1].tex, &srcrect, &dstrect);
@@ -69,8 +70,8 @@ void update_graphic(struct game_state *ga_st)
 
     for (current = ga_st->l_go_ent; current != NULL; current = current->next)
     {
-
-        SDL_Rect srcrect = {current->frame * 66,66. * 1,66,66};
+        current->animation = 1;
+        SDL_Rect srcrect = {current->frame * 66,66. * current->animation,66,66};
         SDL_Rect dstrect = {current->pos.x, current->pos.y, 66,66};
         SDL_RenderCopy(ga_st->renderer, ga_st->tab[3].tex, &srcrect, &dstrect);
     }
