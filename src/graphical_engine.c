@@ -2,33 +2,33 @@
 #include <SDL_image.h>
 
 /*
-static void anim(struct game_state *ga_st) // DELETE ME
-{
-    IMG_Init(IMG_INIT_PNG);
-    SDL_Surface *image = IMG_Load("./ressources/Sprites/Animation.png");
-    SDL_Texture *texture = SDL_CreateTextureFromSurface(ga_st->renderer, image);
+   static void anim(struct game_state *ga_st) // DELETE ME
+   {
+   IMG_Init(IMG_INIT_PNG);
+   SDL_Surface *image = IMG_Load("./ressources/Sprites/Animation.png");
+   SDL_Texture *texture = SDL_CreateTextureFromSurface(ga_st->renderer, image);
 
-    SDL_SetRenderDrawColor(ga_st->renderer, 128, 43, 226, 255);
-    int i = 0;
-    while(1)
-    {
-        SDL_RenderClear(ga_st->renderer);
-        SDL_Rect srcrect = {(i%8)*50, 0,50,50};
-        SDL_Rect dstrect = {10+(i*5),10,50,50};
-        SDL_RenderCopy(ga_st->renderer, texture, &srcrect, &dstrect);
-        SDL_RenderPresent(ga_st->renderer);
-        SDL_Delay(70);
-        i++;
-    }
-    IMG_Quit();
-    SDL_DestroyTexture(texture);
-    SDL_FreeSurface(image);
-}
-*/
+   SDL_SetRenderDrawColor(ga_st->renderer, 128, 43, 226, 255);
+   int i = 0;
+   while(1)
+   {
+   SDL_RenderClear(ga_st->renderer);
+   SDL_Rect srcrect = {(i%8)*50, 0,50,50};
+   SDL_Rect dstrect = {10+(i*5),10,50,50};
+   SDL_RenderCopy(ga_st->renderer, texture, &srcrect, &dstrect);
+   SDL_RenderPresent(ga_st->renderer);
+   SDL_Delay(70);
+   i++;
+   }
+   IMG_Quit();
+   SDL_DestroyTexture(texture);
+   SDL_FreeSurface(image);
+   }
+   */
 static void load_textures(struct game_state *ga_st)
 {
     int size = 2;
-    struct tabTex *tabTex = malloc(sizeof(struct tabTex) * size);
+    struct tabTex *tabTex = malloc(sizeof(struct tabTex) * size-1);
     for (int i = 0; i < size; i++)
     {
         char buff[256];
@@ -39,6 +39,11 @@ static void load_textures(struct game_state *ga_st)
         tabTex[i].type = DECOR;
         SDL_FreeSurface(img);
     }
+    SDL_Surface *img = IMG_Load("./resources/Sprites/Player.png");
+    SDL_Texture *tex = SDL_CreateTextureFromSurface(ga_st->renderer, img);
+    tabTex[3].tex = tex;
+    tabTex[3].type = DECOR;
+    SDL_FreeSurface(img);
     ga_st->tab = tabTex;
     return;
 }
@@ -54,6 +59,8 @@ void update_graphic(struct game_state *ga_st)
         SDL_RenderCopy(ga_st->renderer, ga_st->tab[0].tex, &srcrect, &dstrect);
         SDL_RenderPresent(ga_st->renderer);
     }
+    for (current = ga_st->l_go_ent; current != NULL; current = current->next)
+        continue;
     SDL_Delay(70);
 }
 
