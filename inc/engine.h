@@ -27,7 +27,7 @@ struct game_object
     struct vec2 speed;
     char isupdate;
     int life;
-    enum ENTITY type;
+    enum entity type;
 
     struct game_object *next;
 };
@@ -41,7 +41,7 @@ struct game_state
     struct game_object *l_go_ent;
     struct game_object *l_go_dec;
     unsigned int go_tick;
-}
+};
 
 struct vec2 vadd(struct vec2 a, struct vec2 b);
 struct vec2 vsub(struct vec2 a, struct vec2 b);
