@@ -19,6 +19,9 @@ struct game_state
     SDL_Renderer *renderer;
     SDL_Surface *surface;
 
+    int lv_w;
+    int lv_h;
+
     struct player player;
     struct game_object *l_go_ent;
     struct game_object *l_go_dec;
