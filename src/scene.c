@@ -1,4 +1,5 @@
 #include "graphical_engine.h"
+#include "input.h"
 #include "physical_engine.h"
 
 int game_loop(struct game_state *ga_st)
