@@ -3,6 +3,9 @@
 
 #include "engine.h"
 
-void ph_update(struct game_state *g_st);
+#define GRAVITY_DELAY 50
+#define PHYSICAL_UPDATE_DELAY 5
+
+void physical_update(struct game_state *ga_st);
 
 #endif /* ! PHYSICAL_ENGINE_H */

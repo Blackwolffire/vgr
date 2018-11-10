@@ -25,6 +25,7 @@ struct game_object
     SDL_Rect gprev;
     struct vec2 pos;
     struct vec2 speed;
+    struct vec2 target;
     char isupdate;
     int life;
     enum entity type;
@@ -41,6 +42,7 @@ struct game_state
     struct game_object *l_go_ent;
     struct game_object *l_go_dec;
     unsigned int go_tick;
+    unsigned int ph_up_tick;
 };
 
 struct vec2 vadd(struct vec2 a, struct vec2 b);
