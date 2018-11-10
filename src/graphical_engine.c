@@ -27,9 +27,9 @@
    */
 static void load_textures(struct game_state *ga_st)
 {
-    int size = 2;
-    struct tabTex *tabTex = malloc(sizeof(struct tabTex) * size-1);
-    for (int i = 0; i < size; i++)
+    int size = 5;
+    struct tabTex *tabTex = malloc(sizeof(struct tabTex) * size);
+    for (int i = 0; i < 2; i++)
     {
         char buff[256];
         sprintf(buff, "./resources/Sprites/Block%d.png", i);
@@ -43,6 +43,10 @@ static void load_textures(struct game_state *ga_st)
     SDL_Texture *tex = SDL_CreateTextureFromSurface(ga_st->renderer, img);
     tabTex[3].tex = tex;
     tabTex[3].type = DECOR;
+    SDL_Surface *image = IMG_Load("./resources/Backgrounds/background.png");
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(ga_st->renderer, image);
+    tabTex[4].tex = texture;
+    tabTex[4].type = DECOR;
     SDL_FreeSurface(img);
     ga_st->tab = tabTex;
     return;
@@ -50,39 +54,29 @@ static void load_textures(struct game_state *ga_st)
 
 void update_graphic(struct game_state *ga_st)
 {
+    IMG_Init(IMG_INIT_PNG);
     load_textures(ga_st);
-    int i = 0;
-    int j = 0;
-    int w = 1;
-    while(1)
-    {
-    SDL_RenderClear(ga_st->renderer);
+
+    SDL_RenderCopy(ga_st->renderer, ga_st->tab[4].tex, NULL, NULL);
     struct game_object *current = ga_st->l_go_dec;
     for (; current != NULL; current = current->next)
     {
+        current->frame = 0;
         SDL_Rect srcrect = {0.,0.,16,16};
         SDL_Rect dstrect = {current->pos.x, current->pos.y, 16,16};
         SDL_RenderCopy(ga_st->renderer, ga_st->tab[1].tex, &srcrect, &dstrect);
     }
+
     for (current = ga_st->l_go_ent; current != NULL; current = current->next)
     {
-        SDL_Rect srcrect = {j%7 * 66,66. * w,66,66};
-        SDL_Rect dstrect = {current->pos.x + i*5, current->pos.y, 66,66};
+
+        SDL_Rect srcrect = {current->frame * 66,66. * 1,66,66};
+        SDL_Rect dstrect = {current->pos.x, current->pos.y, 66,66};
         SDL_RenderCopy(ga_st->renderer, ga_st->tab[3].tex, &srcrect, &dstrect);
     }
-    if (i<35)
-    {
-        i++;
-        j++;
-    }
-    else
-    {
-        j = 0;
-        w = 0;
-    }
+
     SDL_RenderPresent(ga_st->renderer);
-    SDL_Delay(75);
-    }
+    SDL_RenderClear(ga_st->renderer);
 }
 
 void init_sdl(struct game_state *ga_st)
