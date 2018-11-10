@@ -3,13 +3,20 @@
 
 int game_loop(struct game_state *ga_st)
 {
+    unsigned int before = SDL_GetTicks();
+    unsigned int after;
+
     while (1)
     {
+        if (input_update(ga_st))
+            return 1;
+
         physical_update(ga_st);
-        update_graphic(ga_st);
-        //ga_st->player.go->frame = (ga_st->player.go->frame + 1) % 7;
-        //ga_st->player.go->pos.x += 7;
-        SDL_Delay(30);
+        if (before + 5 <= (after = SDL_GetTicks()))
+        {
+            update_graphic(ga_st);
+            before = after;
+        }
     }
 
     return 0;

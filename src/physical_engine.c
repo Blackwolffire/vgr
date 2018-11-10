@@ -10,14 +10,7 @@ static void collision(struct game_state *ga_st, struct game_object *go,
 
 static void update_speed(struct game_object *go)
 {
-    if (GRAVITY > fabsf(go->speed.x))
-        go->speed.x = 0.;
-    else
-        go->speed.x += (go->speed.x < 0.) ? GRAVITY : -GRAVITY;
-    if (GRAVITY > fabsf(go->speed.y))
-        go->speed.y = 0.;
-    else
-        go->speed.y += (go->speed.y < 0.) ? GRAVITY : -GRAVITY;
+        go->speed.y += GRAVITY;
 }
 
 static void ph_go_dec_update(struct game_state *ga_st, struct game_object *go)
@@ -139,10 +132,10 @@ void physical_update(struct game_state *ga_st)
     char up_speed = 0;
     unsigned int tick;
 
-    if(ga_st->ph_up_tick + PHYSICAL_UPDATE_DELAY >= (tick = SDL_GetTicks()))
+    if(ga_st->ph_up_tick + PHYSICAL_UPDATE_DELAY <= (tick = SDL_GetTicks()))
     {
         ga_st->ph_up_tick = tick;
-        if(ga_st->go_tick + GRAVITY_DELAY >= tick)
+        if(ga_st->go_tick + GRAVITY_DELAY <= tick)
         {
             up_speed = 1;
             ga_st->go_tick = tick;
