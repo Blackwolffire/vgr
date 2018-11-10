@@ -107,7 +107,11 @@ static void ph_go_ent_update(struct game_state *ga_st, struct game_object *go,
     if (up_speed)
         update_speed(go);
     if (floor_col)
+    {
         go->speed.y = 0;
+        if (go == ga_st->player.go)
+            ga_st->player.can_jump = 1;
+    }
 }
 
 static void ph_update(struct game_state *ga_st, char up_speed)
