@@ -18,6 +18,7 @@ struct game_state
     SDL_Window *window;
     SDL_Renderer *renderer;
     SDL_Surface *surface;
+    SDL_Texture *texture;
 
     int lv_w;
     int lv_h;
