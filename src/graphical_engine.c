@@ -4,14 +4,14 @@
 void anim(struct game_state *ga_st)
 {
     IMG_Init(IMG_INIT_PNG);
-    SDL_Surface *image = IMG_Load("./ressources/Anim2.png");
+    SDL_Surface *image = IMG_Load("./ressources/Sprites/Animation.png");
     SDL_Texture *texture = SDL_CreateTextureFromSurface(ga_st->renderer, image);
 
     SDL_SetRenderDrawColor(ga_st->renderer, 128, 43, 226, 255);
-    SDL_RenderClear(ga_st->renderer);
     int i = 0;
     while(1)
     {
+        SDL_RenderClear(ga_st->renderer);
         SDL_Rect srcrect = {(i%8)*50, 0,50,50};
         SDL_Rect dstrect = {10,10,50,50};
         SDL_RenderCopy(ga_st->renderer, texture, &srcrect, &dstrect);
