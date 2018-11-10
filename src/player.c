@@ -16,9 +16,14 @@ void player_run(struct player *player, char direction)
         player->go->animation = 0;
         player->go->frame = 0;
     }
-    else
+    else if (direction == 1)
     {
         player->go->animation = 1;
+        player->go->frame = (player->go->frame + 1) % 7;
+    }
+    else
+    {
+        player->go->animation = 2;
         player->go->frame = (player->go->frame + 1) % 7;
     }
 }
