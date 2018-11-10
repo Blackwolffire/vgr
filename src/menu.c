@@ -5,7 +5,7 @@
 void perform_selec(enum selec selec, struct game_state *ga_st, int *state)
 {
     ga_st = ga_st;
-    if (selec == 3)
+    if (selec == 2)
     {
         *state = 0;
         SDL_Quit();
@@ -32,6 +32,8 @@ void manage_update(enum selec selec, struct game_state *ga_st, int enter, int *s
     pos_bg.w = ga_st->surface->w;
     pos_bg.h = ga_st->surface->h;
 
+    pos_bg = pos_bg;
+
     SDL_SetRenderDrawColor(ga_st->renderer, 0, 43, 226, 0);
     SDL_Rect pos_selec;
     pos_selec.w = 15;
@@ -47,7 +49,6 @@ void manage_update(enum selec selec, struct game_state *ga_st, int enter, int *s
     else
         pos_selec.y = 225;
 
-    printf("%d  %d\n", pos_selec.x, pos_selec.y);
     SDL_RenderCopy(ga_st->renderer, ga_st->texture, NULL, NULL);
     SDL_RenderFillRect(ga_st->renderer, &pos_selec);
 
@@ -103,7 +104,7 @@ void menu(struct game_state *ga_st)
 {
     init_sdl_tmp(ga_st);
     SDL_Event event;
-    enum selec selec = 0;
+    enum selec selec = 1;
     int state = 1;
     int enter_selec = 0;
 
