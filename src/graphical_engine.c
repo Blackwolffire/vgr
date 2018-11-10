@@ -1,49 +1,24 @@
 #include "graphical_engine.h"
 #include <SDL_image.h>
-/*
-static void print(struct game_state *ga_st)
-{
-    SDL_Surface *pSprite = SDL_LoadBMP("./ressources/OrOS9.bmp");
-    SDL_SetRenderDrawColor(ga_st->renderer, 128, 43, 226, 255);
-    SDL_RenderClear(ga_st->renderer);
-    SDL_RenderPresent(ga_st->renderer);
 
-    if (pSprite)
-    {
-        SDL_Texture* pTexture = SDL_CreateTextureFromSurface(ga_st->renderer,pSprite);
-        if ( pTexture )
-        {
-            SDL_Rect dest = { 640/2 - pSprite->w/2,480/2 - pSprite->h/2, pSprite->w, pSprite->h};
-            SDL_RenderCopy(ga_st->renderer,pTexture,NULL,&dest);
-            SDL_RenderPresent(ga_st->renderer);
-            SDL_Delay(2048);
-            SDL_DestroyTexture(pTexture);
-        }
-        else
-        {
-            fprintf(stdout,"Échec de création de la texture (%s)\n",SDL_GetError());
-        }
-
-        SDL_FreeSurface(pSprite);
-    }
-    else
-    {
-        fprintf(stdout,"Échec de chargement du sprite (%s)\n",SDL_GetError());
-    }
-    SDL_RenderClear(ga_st->renderer);
-    SDL_RenderPresent(ga_st->renderer);
-}
-*/
 void anim(struct game_state *ga_st)
 {
     IMG_Init(IMG_INIT_PNG);
-    SDL_Surface *image = IMG_Load("./ressources/Anim.png");
+    SDL_Surface *image = IMG_Load("./ressources/Anim2.png");
     SDL_Texture *texture = SDL_CreateTextureFromSurface(ga_st->renderer, image);
 
     SDL_SetRenderDrawColor(ga_st->renderer, 128, 43, 226, 255);
     SDL_RenderClear(ga_st->renderer);
-    SDL_RenderPresent(ga_st->renderer);
-
+    int i = 0;
+    while(1)
+    {
+        SDL_Rect srcrect = {(i%8)*50, 0,50,50};
+        SDL_Rect dstrect = {10,10,50,50};
+        SDL_RenderCopy(ga_st->renderer, texture, &srcrect, &dstrect);
+        SDL_RenderPresent(ga_st->renderer);
+        SDL_Delay(70);
+        i++;
+    }
     IMG_Quit();
     SDL_DestroyTexture(texture);
     SDL_FreeSurface(image);
