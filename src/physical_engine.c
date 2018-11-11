@@ -4,8 +4,14 @@
 static void collision(struct game_state *ga_st, struct game_object *go,
                       struct game_object *dec)
 {
-    if (!ga_st || !go || !dec)
+    if (!ga_st)
         return;
+    if (dec->type == DEATH_BLOCK)
+    {
+        if (go == ga_st->player.go)
+            ga_st->player.alive = 0;
+        go_free(ga_st->l_go_ent, go);
+    }
 }
 
 static void update_speed(struct game_object *go)
@@ -100,6 +106,8 @@ static void ph_go_ent_update(struct game_state *ga_st, struct game_object *go,
         go->pos = pos;
         if (go->pos.y > ga_st->lv_h)
         {
+            if (go == ga_st->player.go)
+                ga_st->player.alive = 0;
             go_free(ga_st->l_go_ent, go);
             return;
         }

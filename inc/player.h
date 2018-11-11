@@ -11,8 +11,9 @@
 
 struct player
 {
-    struct game_object *go;
+    char alive;
     char can_jump;
+    struct game_object *go;
 };
 
 void player_jump(struct player *player);

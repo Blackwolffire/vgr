@@ -9,7 +9,8 @@ enum go_type
     DECOR,
     PLAYER,
     ENNEMY,
-    PROJECTILE
+    PROJECTILE,
+    DEATH_BLOCK
 };
 
 struct game_object
