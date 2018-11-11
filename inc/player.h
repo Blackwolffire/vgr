@@ -23,5 +23,6 @@ struct player
 
 void player_jump(struct player *player);
 void player_run(struct player *player, char direction);
+void player_shoot(struct player *player);
 
 #endif /* ! PLAYER_H */
