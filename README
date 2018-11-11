@@ -16,6 +16,7 @@ INSTRUCTIONS
     MENU
         Use Up and Down arrow to navigate through the menu.
         Select something pressing ENTER.
+        From fail screen, press ESC to go back to menu.
     GAME
         TO MOVE
             Left arrow, 'A'  : go left
