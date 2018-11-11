@@ -30,7 +30,11 @@ void load_textures(struct game_state *ga_st)
     SDL_Texture *textur = SDL_CreateTextureFromSurface(ga_st->renderer, image);
     tabTex[g_size - 1].tex = textur;
     tabTex[g_size - 1].type = DECOR;
+
+
     SDL_FreeSurface(img);
+    SDL_FreeSurface(pro);
+    SDL_FreeSurface(image);
     ga_st->tab = tabTex;
     return;
 }
