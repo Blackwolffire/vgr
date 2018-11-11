@@ -43,16 +43,16 @@ void player_shoot(struct player *player)
     else
         return;
     go = malloc(sizeof(struct game_object));
-    go->pos.y = player->go->pos.y;
+    go->pos.y = player->go->pos.y + PLAYER_HEIGHT / 2;
     go->speed.y = 0.;
     if (player->go->speed.x < 0.)
     {
-        go->pos.x = player->go->pos.x - FLOOR_WIDTH * 2.;
+        go->pos.x = player->go->pos.x - FLOOR_WIDTH * 5.;
         go->speed.x = -PLAYER_SPEED * 2;
     }
     else
     {
-        go->pos.x = player->go->pos.x + player->go->gpos.w + FLOOR_WIDTH * 2.;
+        go->pos.x = player->go->pos.x + player->go->gpos.w + FLOOR_WIDTH * 5.;
         go->speed.x = PLAYER_SPEED * 2;
     }
     go->type = PROJECTILE;
