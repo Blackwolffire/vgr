@@ -144,6 +144,10 @@ void init_sdl(struct game_state *ga_st)
 
 void free_sdl(struct game_state *ga_st)
 {
+    for (int i = 0; i < g_size; i++)
+        SDL_DestroyTexture(ga_st->tab[i].tex);
+    free(ga_st->tab);
+
     SDL_DestroyTexture(ga_st->texture);
     SDL_FreeSurface(ga_st->surface);
     SDL_DestroyWindow(ga_st->window);
