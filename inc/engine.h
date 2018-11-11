@@ -21,6 +21,11 @@ struct game_state
     SDL_Surface *surface;
     SDL_Texture *texture;
 
+    Mix_Music *music;
+    Mix_Chunk *win;
+    Mix_Chunk *cri;
+    Mix_Chunk *def;
+
     int lv_w;
     int lv_h;
 
