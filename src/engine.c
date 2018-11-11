@@ -43,6 +43,7 @@ static void game_state_init(struct game_state *ga_st)
     ga_st->player.alive = 1;
     ga_st->player.won = 0;
     ga_st->player.hit_tick = 0;
+    ga_st->player.shoot_tick = 0;
 }
 
 static void load_go(struct game_state *ga_st, int x, int y, char type)

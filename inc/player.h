@@ -9,6 +9,7 @@
 #define PLAYER_JUMP 7
 #define PLAYER_SPEED 2
 #define PLAYER_HIT 2000
+#define PLAYER_SHOOT 500
 
 struct player
 {
@@ -16,6 +17,7 @@ struct player
     char can_jump;
     char won;
     unsigned int hit_tick;
+    unsigned int shoot_tick;
     struct game_object *go;
 };
 
