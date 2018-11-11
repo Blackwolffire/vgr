@@ -13,6 +13,8 @@ void winScreen(struct game_state *ga_st)
     SDL_RenderPresent(ga_st->renderer);
     Mix_PlayChannel(-1, ga_st->win, 0);
     SDL_Delay(2000);
+    SDL_FreeSurface(surf);
+    SDL_DestroyTexture(tex);
 }
 
 void failScreen(struct game_state *ga_st)
@@ -24,6 +26,9 @@ void failScreen(struct game_state *ga_st)
     SDL_RenderPresent(ga_st->renderer);
     Mix_PlayChannel(-1, ga_st->def, 0);
     SDL_Delay(400);
+    SDL_FreeSurface(surf);
+    SDL_DestroyTexture(tex);
+
 }
 
 void cheatcodewin(struct game_state *ga_st)
