@@ -12,6 +12,9 @@ static void collision(struct game_state *ga_st, struct game_object *go,
             ga_st->player.alive = 0;
         go_free(ga_st->l_go_ent, go);
     }
+    else if (dec->type == EXIT)
+        if (go == ga_st->player.go)
+            ga_st->player.won = 1;
 }
 
 static void update_speed(struct game_object *go)
@@ -62,7 +65,7 @@ static void ph_go_ent_update(struct game_state *ga_st, struct game_object *go,
         if (go == dec)
             continue;
         if (pos.x >= dec->pos.x && pos.x <= dec->pos.x + dec->gpos.w
-             && pos.y >= dec->pos.y && pos.y <= dec->pos.y + dec->gpos.h)
+            && pos.y >= dec->pos.y && pos.y <= dec->pos.y + dec->gpos.h)
         {
             collid = 1;
             collision(ga_st, go, dec);
@@ -77,17 +80,17 @@ static void ph_go_ent_update(struct game_state *ga_st, struct game_object *go,
             dec->isupdate = 1;
         }
         else if (pos.x >= dec->pos.x && pos.x <= dec->pos.x + dec->gpos.w
-                && pos.y + go->gpos.h >= dec->pos.y
-                && pos.y + go->gpos.h <= dec->pos.y + dec->gpos.h)
+                 && pos.y + go->gpos.h >= dec->pos.y
+                 && pos.y + go->gpos.h <= dec->pos.y + dec->gpos.h)
         {
             collid = floor_col = 1;
             collision(ga_st, go, dec);
             dec->isupdate = 1;
         }
         else if (pos.x + go->gpos.w >= dec->pos.x
-                && pos.x + go->gpos.w <= dec->pos.x + dec->gpos.w
-                && pos.y + go->gpos.h >= dec->pos.y
-                && pos.y + go->gpos.h <= dec->pos.y + dec->gpos.h)
+                 && pos.x + go->gpos.w <= dec->pos.x + dec->gpos.w
+                 && pos.y + go->gpos.h >= dec->pos.y
+                 && pos.y + go->gpos.h <= dec->pos.y + dec->gpos.h)
         {
             collid = floor_col = 1;
             collision(ga_st, go, dec);

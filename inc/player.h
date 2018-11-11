@@ -13,6 +13,7 @@ struct player
 {
     char alive;
     char can_jump;
+    char won;
     struct game_object *go;
 };
 

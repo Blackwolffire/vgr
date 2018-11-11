@@ -40,6 +40,7 @@ static void game_state_init(struct game_state *ga_st)
     ga_st->go_tick = 0;
     ga_st->ph_up_tick = 0;
     ga_st->player.alive = 1;
+    ga_st->player.won = 0;
 }
 
 static void load_go(struct game_state *ga_st, int x, int y, char type)
@@ -78,6 +79,13 @@ static void load_go(struct game_state *ga_st, int x, int y, char type)
     else if (type == '4')
     {
         go->type = DECOR_SUP;
+        go_dec_list_add(ga_st, go);
+        go->gpos.w = FLOOR_WIDTH;
+        go->gpos.h = FLOOR_HEIGHT;
+    }
+    else if (type == 'b')
+    {
+        go->type = EXIT;
         go_dec_list_add(ga_st, go);
         go->gpos.w = FLOOR_WIDTH;
         go->gpos.h = FLOOR_HEIGHT;

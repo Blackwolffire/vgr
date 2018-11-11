@@ -11,7 +11,8 @@ enum go_type
     PLAYER,
     ENNEMY,
     PROJECTILE,
-    DEATH_BLOCK
+    DEATH_BLOCK,
+    EXIT
 };
 
 struct game_object

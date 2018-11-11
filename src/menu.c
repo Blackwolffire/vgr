@@ -4,6 +4,8 @@
 
 void perform_selec(enum selec selec, struct game_state *ga_st, int *state)
 {
+    int tmp;
+
     ga_st = ga_st;
     if (selec == 2)
     {
@@ -13,15 +15,21 @@ void perform_selec(enum selec selec, struct game_state *ga_st, int *state)
     else if (selec == 0)
     {
         load_level(ga_st, "resources/maps/lv0.map");
-        game_loop(ga_st);
+        tmp = game_loop(ga_st);
         free_level(ga_st);
+        if (tmp == 1)
+        {
+            *state = 0;
+            SDL_Quit();
+        }
     }
 
     else
         SDL_Delay(400);
 }
 
-void manage_update(enum selec selec, struct game_state *ga_st, int enter, int *state)
+void manage_update(enum selec selec, struct game_state *ga_st, int enter,
+                   int *state)
 {
     if (enter == 1)
     {
