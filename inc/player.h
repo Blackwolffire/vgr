@@ -8,12 +8,14 @@
 #define PLAYER_HEIGHT 52
 #define PLAYER_JUMP 7
 #define PLAYER_SPEED 2
+#define PLAYER_HIT 2000
 
 struct player
 {
     char alive;
     char can_jump;
     char won;
+    unsigned int hit_tick;
     struct game_object *go;
 };
 

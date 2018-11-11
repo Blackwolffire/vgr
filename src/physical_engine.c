@@ -6,6 +6,8 @@
 static void collision(struct game_state *ga_st, struct game_object *go,
                       struct game_object *gob)
 {
+    unsigned int tick;
+
     if (gob->type == DEATH_BLOCK)
     {
         if (go == ga_st->player.go)
@@ -40,9 +42,14 @@ static void collision(struct game_state *ga_st, struct game_object *go,
     }
     else if (go->type == PLAYER && gob->type == ENEMY)
     {
-        go->life -= LASER_POWER;
-        if (go->life <= 0)
-            ga_st->player.alive = 0;
+        tick = SDL_GetTicks();
+        if (ga_st->player.hit_tick + PLAYER_HIT <= tick)
+        {
+            go->life -= LASER_POWER;
+            if (go->life <= 0)
+                ga_st->player.alive = 0;
+            ga_st->player.hit_tick = tick;
+        }
     }
     play_chunk(ga_st, gob);
 }
@@ -142,7 +149,8 @@ static void ph_go_ent_update(struct game_state *ga_st, struct game_object *go,
     if (!collid)
     {
         go->pos = pos;
-        if (go->pos.y > ga_st->lv_h)
+        if (go->pos.y > ga_st->lv_h || go->pos.x < -100
+            || go->pos.x > ga_st->lv_w + 100)
         {
             if (go == ga_st->player.go)
                 ga_st->player.alive = 0;
