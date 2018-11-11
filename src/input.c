@@ -1,4 +1,5 @@
 #include "input.h"
+#include "scene.h"
 
 int input_update(struct game_state *ga_st)
 {
@@ -25,6 +26,11 @@ int input_update(struct game_state *ga_st)
         player_run(&ga_st->player, 1);
     else if (key[SDL_SCANCODE_A] || key[SDL_SCANCODE_LEFT])
         player_run(&ga_st->player, -1);
+    else if (key[SDL_SCANCODE_LCTRL])
+    {
+        cheatcodewin(ga_st);
+        return 3;
+    }
     else
         player_run(&ga_st->player, 0);
     return 0;

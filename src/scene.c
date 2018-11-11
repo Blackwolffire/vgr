@@ -26,6 +26,11 @@ void failScreen(struct game_state *ga_st)
     SDL_Delay(400);
 }
 
+void cheatcodewin(struct game_state *ga_st)
+{
+    winScreen(ga_st);
+    return;
+}
 
 int game_loop(struct game_state *ga_st)
 {
