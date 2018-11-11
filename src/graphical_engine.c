@@ -6,7 +6,7 @@ int g_size;
 
 void load_textures(struct game_state *ga_st)
 {
-    g_size = 6;
+    g_size = 8;
     struct tabTex *tabTex = malloc(sizeof(struct tabTex) * g_size);
     for (int i = 0; i < g_size - 3; i++)
     {
@@ -56,12 +56,18 @@ void update_graphic(struct game_state *ga_st)
     for (cur = ga_st->l_go_ent; cur != NULL; cur = cur->next)
     {
         int i = 0;
+        int s = 16; //size
         if (cur->type == PLAYER)
+        {
             i = g_size - 2;
+            s = 66;
+        }
         else if (cur->type == PROJECTILE)
             i = g_size - 3;
-        SDL_Rect srcrect = {cur->frame * 66, cur->animation * 67, 66, 66};
-        SDL_Rect dstrect = {cur->pos.x - 23, cur->pos.y - 10, 66 , 66};
+        else if (cur->type == ENEMY)
+            i = 4;
+        SDL_Rect srcrect = {cur->frame * s, cur->animation * s, s, s};
+        SDL_Rect dstrect = {cur->pos.x - 23, cur->pos.y - 10,s , s};
         SDL_RenderCopy(ga_st->renderer, ga_st->tab[i].tex, &srcrect, &dstrect);
     }
     SDL_RenderPresent(ga_st->renderer);
