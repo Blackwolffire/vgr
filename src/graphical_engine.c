@@ -22,7 +22,7 @@ void load_textures(struct game_state *ga_st)
     SDL_Texture *tex_pro = SDL_CreateTextureFromSurface(ga_st->renderer, pro);
     tabTex[g_size - 3].tex = tex_pro;
     tabTex[g_size - 3].type = PROJECTILE;
-    SDL_Surface *img = IMG_Load("./resources/Sprites/Player2.png");
+    SDL_Surface *img = IMG_Load("./resources/Sprites/Player.png");
     SDL_Texture *tex = SDL_CreateTextureFromSurface(ga_st->renderer, img);
     tabTex[g_size - 2].tex = tex;
     tabTex[g_size - 2].type = DECOR;
@@ -60,8 +60,8 @@ void update_graphic(struct game_state *ga_st)
             i = g_size - 2;
         else if (cur->type == PROJECTILE)
             i = g_size - 3;
-        SDL_Rect srcrect = {cur->frame * 66, cur->animation * 66, 66, 66};
-        SDL_Rect dstrect = {cur->pos.x - 23, cur->pos.y, 66,66};
+        SDL_Rect srcrect = {cur->frame * 66, cur->animation * 67, 66, 66};
+        SDL_Rect dstrect = {cur->pos.x - 23, cur->pos.y - 10, 66 , 66};
         SDL_RenderCopy(ga_st->renderer, ga_st->tab[i].tex, &srcrect, &dstrect);
     }
     SDL_RenderPresent(ga_st->renderer);
