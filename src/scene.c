@@ -5,14 +5,27 @@
 
 void winScreen(struct game_state *ga_st)
 {
-    SDL_SetRenderDrawColor(ga_st->renderer,0,0,0,255);
+    //SDL_SetRenderDrawColor(ga_st->renderer,0,0,0,255);
     SDL_RenderClear(ga_st->renderer);
-    SDL_Surface *surf = IMG_Load("./resources/Backgrounds/Win.png");
+    SDL_Surface *surf = IMG_Load("./resources/Backgrounds/win.png");
     SDL_Texture *tex = SDL_CreateTextureFromSurface(ga_st->renderer, surf);
     SDL_RenderCopy(ga_st->renderer, tex, NULL, NULL);
     SDL_RenderPresent(ga_st->renderer);
-    SDL_Delay(2000);
+    Mix_PlayChannel(-1, ga_st->win, 0);
+    SDL_Delay(400);
 }
+
+void failScreen(struct game_state *ga_st)
+{
+    SDL_RenderClear(ga_st->renderer);
+    SDL_Surface *surf = IMG_Load("./resources/Backgrounds/fail.png");
+    SDL_Texture *tex = SDL_CreateTextureFromSurface(ga_st->renderer, surf);
+    SDL_RenderCopy(ga_st->renderer, tex, NULL, NULL);
+    SDL_RenderPresent(ga_st->renderer);
+    Mix_PlayChannel(-1, ga_st->def, 0);
+    SDL_Delay(400);
+}
+
 
 int game_loop(struct game_state *ga_st)
 {
@@ -33,7 +46,10 @@ int game_loop(struct game_state *ga_st)
             before = after;
         }
         if (!ga_st->player.alive)
+        {
+            failScreen(ga_st);
             return 0;
+        }
         if (ga_st->player.won)
         {
             winScreen(ga_st);
