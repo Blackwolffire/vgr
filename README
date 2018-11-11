@@ -30,17 +30,18 @@ INSTRUCTIONS
 
 FEATURES
 
-    -  AYA-MAN has 2000 pv and lose 200 if he touched an enemy, except mortal
+    -  AYA-MAN has 1000 pv and lose 200 if he touched an enemy, except mortal
        traps.
     -  AYA-MAN mooves to left and right, can jump and he suffers gravity.
     -  There is 2 rooms in that game. You can access the second one if the
        first has been successfuly ended.
-    -  Enemies can take 2 forms : trap and static foe.
+    -  Enemies can take 2 forms : trap and static foe who can attack too..
     -  Game over or not is indcated as the end of the game, before going back
        to menu.
     -  There is a music theme and different samples for different occasions :
        touch an enemy, die, win, ...
     -  CheatCode : find the cheatcode to end the game
+    -  AYA-MAN has life bar which decrease when he is touched by an ennemy.
 
 
 
@@ -53,3 +54,9 @@ COPYRIGHT/ATTRIBUTION NOTICE
     Master484          - Mecha
     #spriters-resource.com#
     redblueyellow      - Player
+
+
+TO COMPILE
+
+    make : to produce the aya binary.
+    make clean : delete everything produce by make.
