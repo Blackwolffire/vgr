@@ -9,7 +9,7 @@
 #define PLAYER_JUMP 7
 #define PLAYER_SPEED 2
 #define PLAYER_HIT 2000
-#define PLAYER_SHOOT 500
+#define PLAYER_SHOOT 100
 
 struct player
 {

@@ -3,11 +3,15 @@
 #include "physical_engine.h"
 #include "enemy.h"
 
+#include <stdio.h>
+
 static void collision(struct game_state *ga_st, struct game_object *go,
                       struct game_object *gob)
 {
     unsigned int tick;
 
+    if (go->type == PROJECTILE && gob->type == PROJECTILE)
+        return;
     if (gob->type == DEATH_BLOCK)
     {
         if (go == ga_st->player.go)
@@ -51,6 +55,8 @@ static void collision(struct game_state *ga_st, struct game_object *go,
             ga_st->player.hit_tick = tick;
         }
     }
+    else if (go->type == PROJECTILE)
+        go_free(ga_st->l_go_ent, go);
     play_chunk(ga_st, gob);
 }
 

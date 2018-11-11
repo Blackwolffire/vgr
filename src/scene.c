@@ -74,6 +74,7 @@ int game_loop(struct game_state *ga_st)
                 return 3;
             }
         }
+        shoot_enemy(ga_st);
         SDL_Delay(1);
     }
 

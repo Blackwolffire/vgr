@@ -38,13 +38,14 @@ void player_shoot(struct player *player)
     unsigned int tick = SDL_GetTicks();
     struct game_object *go;
 
-    if (player->shoot_tick + PLAYER_SHOOT < tick)
+    if (player->shoot_tick + PLAYER_SHOOT <= tick)
         player->shoot_tick = tick;
     else
         return;
     go = malloc(sizeof(struct game_object));
     go->pos.y = player->go->pos.y + PLAYER_HEIGHT / 2;
     go->speed.y = 0.;
+    go->life = 1;
     if (player->go->speed.x < 0.)
     {
         go->pos.x = player->go->pos.x - FLOOR_WIDTH * 5.;

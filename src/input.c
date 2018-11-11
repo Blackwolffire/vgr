@@ -1,5 +1,8 @@
+#include <stdio.h>
 #include "input.h"
 #include "scene.h"
+
+static int nb = 0;
 
 int input_update(struct game_state *ga_st)
 {
@@ -15,8 +18,15 @@ int input_update(struct game_state *ga_st)
             else if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
                 return 2;
             else if (event.key.keysym.scancode == SDL_SCANCODE_L)
-                player_shoot(&ga_st->player);
+            {
+                if (!nb)
+                    player_shoot(&ga_st->player);
+                nb = 1;
+            }
         }
+        else if (event.type == SDL_KEYUP)
+            if (event.key.keysym.scancode == SDL_SCANCODE_L)
+                nb = 0;
 
     }
 
@@ -33,5 +43,12 @@ int input_update(struct game_state *ga_st)
     }
     else
         player_run(&ga_st->player, 0);
+/*
+    if (key[SDL_SCANCODE_L])
+    {
+    }
+    else
+        nb = 0;*/
+
     return 0;
 }

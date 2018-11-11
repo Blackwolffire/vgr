@@ -34,6 +34,7 @@ struct game_state
     struct game_object *l_go_dec;
     unsigned int go_tick;
     unsigned int ph_up_tick;
+    unsigned int enemy_tick;
     struct tabTex *tab;
 };
 
@@ -44,5 +45,6 @@ void go_ent_list_add(struct game_state *ga_st, struct game_object *go);
 void go_dec_list_add(struct game_state *ga_st, struct game_object *go);
 void load_level(struct game_state *ga_st, char *fin);
 void free_level(struct game_state *ga_st);
+void shoot_enemy(struct game_state *ga_st);
 
 #endif /* ! ENGINE_H */

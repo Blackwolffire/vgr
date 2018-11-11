@@ -7,6 +7,7 @@
 #include "engine.h"
 #include "constant_sprite.h"
 #include "enemy.h"
+#include <stdio.h>
 
 struct vec2 vadd(struct vec2 a, struct vec2 b)
 {
@@ -44,6 +45,7 @@ static void game_state_init(struct game_state *ga_st)
     ga_st->player.won = 0;
     ga_st->player.hit_tick = 0;
     ga_st->player.shoot_tick = 0;
+    ga_st->enemy_tick = 0;
 }
 
 static void load_go(struct game_state *ga_st, int x, int y, char type)
@@ -150,4 +152,27 @@ void free_level(struct game_state *ga_st)
 {
     go_list_free(ga_st->l_go_ent);
     go_list_free(ga_st->l_go_dec);
+}
+
+void shoot_enemy(struct game_state *ga_st)
+{
+    unsigned int tick = SDL_GetTicks();
+    struct game_object *go;
+
+    if (ga_st->enemy_tick + ENEMY_SHOOT <= tick)
+        ga_st->enemy_tick = tick;
+    else
+        return;
+
+    go = ga_st->l_go_ent;
+    while (go)
+    {
+        if (go->type != ENEMY)
+        {
+            go = go->next;
+            continue;
+        }
+        enemy_shoot(ga_st, go);
+        go = go->next;
+    }
 }
