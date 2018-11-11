@@ -41,7 +41,6 @@ void load_textures(struct game_state *ga_st)
 
 void update_graphic(struct game_state *ga_st)
 {
-    IMG_Init(IMG_INIT_PNG);
     SDL_RenderCopy(ga_st->renderer, ga_st->tab[g_size - 1].tex, NULL, NULL);
     struct game_object *cur = ga_st->l_go_dec;
     for (; cur != NULL; cur = cur->next)
