@@ -12,14 +12,14 @@ int game_loop(struct game_state *ga_st)
         if (input_update(ga_st))
             return 1;
         physical_update(ga_st);
-        if (before + 12 <= (after = SDL_GetTicks()))
+        if (before + 10 <= (after = SDL_GetTicks()))
         {
             update_graphic(ga_st);
             before = after;
         }
         if (!ga_st->player.alive)
             return 0;
-        SDL_Delay(3);
+        SDL_Delay(1);
     }
 
     return 0;
