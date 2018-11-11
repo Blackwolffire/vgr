@@ -135,6 +135,9 @@ void free_sdl(struct game_state *ga_st)
     SDL_DestroyWindow(ga_st->window);
     SDL_DestroyRenderer(ga_st->renderer);
     Mix_FreeMusic(ga_st->music);
+    Mix_FreeChunk(ga_st->cri);
+    Mix_FreeChunk(ga_st->win);
+    Mix_FreeChunk(ga_st->def);
     Mix_CloseAudio();
     IMG_Quit();
 }
