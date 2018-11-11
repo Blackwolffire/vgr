@@ -60,7 +60,7 @@ void update_graphic(struct game_state *ga_st)
         if (cur->type == PLAYER)
         {
             i = g_size - 2;
-            s = 66;
+            s = 67;
         }
         else if (cur->type == PROJECTILE)
             i = g_size - 3;
