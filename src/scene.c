@@ -12,7 +12,7 @@ void winScreen(struct game_state *ga_st)
     SDL_RenderCopy(ga_st->renderer, tex, NULL, NULL);
     SDL_RenderPresent(ga_st->renderer);
     Mix_PlayChannel(-1, ga_st->win, 0);
-    SDL_Delay(400);
+    SDL_Delay(2000);
 }
 
 void failScreen(struct game_state *ga_st)
