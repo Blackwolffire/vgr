@@ -3,25 +3,54 @@
 #include "physical_engine.h"
 
 static void collision(struct game_state *ga_st, struct game_object *go,
-                      struct game_object *dec)
+                      struct game_object *gob)
 {
-    if (!ga_st)
-        return;
-    if (dec->type == DEATH_BLOCK)
+    if (gob->type == DEATH_BLOCK)
     {
         if (go == ga_st->player.go)
             ga_st->player.alive = 0;
-        go_free(ga_st->l_go_ent, go);
     }
-    else if (dec->type == EXIT)
+    else if (gob->type == EXIT)
+    {
         if (go == ga_st->player.go)
             ga_st->player.won = 1;
-    play_chunk(ga_st, dec);
+    }
+    else if (gob->type == PROJECTILE)
+    {
+        go->life -= LASER_POWER;
+        if (go->life <= 0)
+        {
+            if (go == ga_st->player.go)
+                ga_st->player.alive = 0;
+            go_free(ga_st->l_go_ent, go);
+        }
+        go_free(ga_st->l_go_ent, gob);
+    }
+    else if (go->type == PROJECTILE)
+    {
+        gob->life -= LASER_POWER;
+        if (gob->life <= 0)
+        {
+            if (gob == ga_st->player.go)
+                ga_st->player.alive = 0;
+            go_free(ga_st->l_go_ent, gob);
+        }
+        go_free(ga_st->l_go_ent, go);
+    }
+    else if (go->type == PLAYER && gob->type == ENEMY)
+    {
+        go->life -= LASER_POWER;
+        if (go->life <= 0)
+            ga_st->player.alive = 0;
+    }
+    play_chunk(ga_st, gob);
 }
 
 static void update_speed(struct game_object *go)
 {
-        go->speed.y += GRAVITY;
+    if (go->type == PROJECTILE)
+        return;
+    go->speed.y += GRAVITY;
 }
 
 static void ph_go_dec_update(struct game_state *ga_st, struct game_object *go)
@@ -127,6 +156,51 @@ static void ph_go_ent_update(struct game_state *ga_st, struct game_object *go,
     }
 }
 
+static void ph_go_ent_ent_up(struct game_state *ga_st, struct game_object *go)
+{
+    struct game_object *ent = ga_st->l_go_ent;
+    struct vec2 pos = go->pos;
+
+    while (ent)
+    {
+        if (go == ent)
+            continue;
+        if (pos.x >= ent->pos.x && pos.x <= ent->pos.x + ent->gpos.w
+            && pos.y >= ent->pos.y && pos.y <= ent->pos.y + ent->gpos.h)
+        {
+            collid = 1;
+            collision(ga_st, go, ent);
+            ent->isupdate = 1;
+        }
+        else if (pos.x + go->gpos.w >= ent->pos.x
+                && pos.x + go->gpos.w <= ent->pos.x + dent>gpos.w
+                && pos.y >= ent->pos.y && pos.y <= ent->pos.y + ent->gpos.h)
+        {
+            collid = 1;
+            collision(ga_st, go, ent);
+            ent->isupdate = 1;
+        }
+        else if (pos.x >= ent->pos.x && pos.x <= ent->pos.x + ent->gpos.w
+                 && pos.y + go->gpos.h >= ent->pos.y
+                 && pos.y + go->gpos.h <= ent->pos.y + ent->gpos.h)
+        {
+            collid = floor_col = 1;
+            collision(ga_st, go, ent);
+            ent->isupdate = 1;
+        }
+        else if (pos.x + go->gpos.w >= ent->pos.x
+                 && pos.x + go->gpos.w <= ent->pos.x + ent->gpos.w
+                 && pos.y + go->gpos.h >= ent->pos.y
+                 && pos.y + go->gpos.h <= ent->pos.y + ent->gpos.h)
+        {
+            collid = floor_col = 1;
+            collision(ga_st, go, ent);
+            ent->isupdate = 1;
+        }
+        ent = ent->next;
+    }
+}
+
 static void ph_update(struct game_state *ga_st, char up_speed)
 {
     struct game_object *go = ga_st->l_go_ent;
@@ -134,6 +208,8 @@ static void ph_update(struct game_state *ga_st, char up_speed)
     while (go)
     {
         ph_go_ent_update(ga_st, go, up_speed);
+        if (go->type != ENEMY)
+            ph_go_ent_ent_up(ga_st, go);
         go = go->next;
     }
     go = ga_st->l_go_dec;

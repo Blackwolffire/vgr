@@ -69,6 +69,13 @@ static void load_go(struct game_state *ga_st, int x, int y, char type)
         go->gpos.w = FLOOR_WIDTH;
         go->gpos.h = FLOOR_HEIGHT;
     }
+    else if (type == '4')
+    {
+        go->type = ENEMY;
+        go_ent_list_add(ga_st, go);
+        go->gpos.w = ENEMY_WIDTH;
+        go->gpos.h = ENEMY_HEIGHT;
+    }
     else if (type == 'a')
     {
         go->type = DEATH_BLOCK;

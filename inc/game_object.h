@@ -9,7 +9,7 @@ enum go_type
     DECOR,
     DECOR_SUP,
     PLAYER,
-    ENNEMY,
+    ENEMY,
     PROJECTILE,
     DEATH_BLOCK,
     EXIT
