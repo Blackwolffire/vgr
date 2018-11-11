@@ -1,4 +1,5 @@
 #include <math.h>
+#include "audio.h"
 #include "physical_engine.h"
 
 static void collision(struct game_state *ga_st, struct game_object *go,
@@ -15,6 +16,7 @@ static void collision(struct game_state *ga_st, struct game_object *go,
     else if (dec->type == EXIT)
         if (go == ga_st->player.go)
             ga_st->player.won = 1;
+    play_chunk(ga_st, dec);
 }
 
 static void update_speed(struct game_object *go)
