@@ -4,10 +4,10 @@
 #include "game_object.h"
 
 #define PLAYER_LIFE 1000
-#define PLAYER_WIDTH 50
-#define PLAYER_HEIGHT 50
-#define PLAYER_JUMP 35
-#define PLAYER_SPEED 10
+#define PLAYER_WIDTH 19
+#define PLAYER_HEIGHT 52
+#define PLAYER_JUMP 6
+#define PLAYER_SPEED 2
 
 struct player
 {

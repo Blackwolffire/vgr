@@ -4,7 +4,7 @@
 #include "player.h"
 #include <SDL_image.h>
 
-#define GRAVITY 9.81
+#define GRAVITY 1.981
 
 struct tabTex
 {
