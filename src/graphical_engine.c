@@ -4,9 +4,9 @@
 
 void load_textures(struct game_state *ga_st)
 {
-    int size = 4;
+    int size = 6;
     struct tabTex *tabTex = malloc(sizeof(struct tabTex) * size);
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 3; i++)
     {
         char buff[256];
         sprintf(buff, "./resources/Sprites/Block%d.png", i);
@@ -18,8 +18,8 @@ void load_textures(struct game_state *ga_st)
     }
     SDL_Surface *pro = IMG_Load("./resources/Sprites/Projectile.png");
     SDL_Texture *tex_pro = SDL_CreateTextureFromSurface(ga_st->renderer, pro);
-    tabTex[3].tex = tex_pro;
-    tabTex[3].type = PROJECTILE;
+    tabTex[size - 3].tex = tex_pro;
+    tabTex[size - 3].type = PROJECTILE;
     SDL_Surface *img = IMG_Load("./resources/Sprites/Player.png");
     SDL_Texture *tex = SDL_CreateTextureFromSurface(ga_st->renderer, img);
     tabTex[size - 2].tex = tex;
@@ -37,7 +37,7 @@ void update_graphic(struct game_state *ga_st)
 {
     IMG_Init(IMG_INIT_PNG);
 
-    SDL_RenderCopy(ga_st->renderer, ga_st->tab[3].tex, NULL, NULL);
+    SDL_RenderCopy(ga_st->renderer, ga_st->tab[5].tex, NULL, NULL);
     struct game_object *cur = ga_st->l_go_dec;
     for (; cur != NULL; cur = cur->next)
     {
@@ -45,7 +45,7 @@ void update_graphic(struct game_state *ga_st)
         //cur->animation = 0;
         SDL_Rect srcrect = {0.,0.,16,16};
         SDL_Rect dstrect = {cur->pos.x, cur->pos.y, 16,16};
-        SDL_RenderCopy(ga_st->renderer, ga_st->tab[1].tex, &srcrect, &dstrect);
+        SDL_RenderCopy(ga_st->renderer, ga_st->tab[2].tex, &srcrect, &dstrect);
     }
 
     for (cur = ga_st->l_go_ent; cur != NULL; cur = cur->next)
@@ -53,7 +53,7 @@ void update_graphic(struct game_state *ga_st)
         //cur->animation = 1;
         int i = 0;
         if (cur->type == PLAYER)
-            i = 2;
+            i = 4;
         else if (cur->type == PROJECTILE)
             i = 3;
         SDL_Rect srcrect = {cur->frame * 66, cur->animation * 66, 66, 66};
@@ -74,7 +74,7 @@ void init_sdl(struct game_state *ga_st)
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
     IMG_Init(IMG_INIT_PNG);
     window = SDL_CreateWindow("Window", SDL_WINDOWPOS_UNDEFINED,
-            SDL_WINDOWPOS_UNDEFINED, 600, 400, 0);
+            SDL_WINDOWPOS_UNDEFINED, 1280, 720, 0);
     if (!window)
     {
         warnx("pb window");
