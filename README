@@ -1,6 +1,51 @@
-Copyright/Attribution Notice:
-#opengameart.org#
-Darkagent(Arbiyan) - Dirt/Soil
-Big Rook Games     - Lava
-Blarget2           - Background
-Master484          - Mecha
+
+  █████╗ ██╗   ██╗ █████╗       ███╗   ███╗ █████╗ ███╗   ██╗
+ ██╔══██╗╚██╗ ██╔╝██╔══██╗      ████╗ ████║██╔══██╗████╗  ██║
+ ███████║ ╚████╔╝ ███████║█████╗██╔████╔██║███████║██╔██╗ ██║
+ ██╔══██║  ╚██╔╝  ██╔══██║╚════╝██║╚██╔╝██║██╔══██║██║╚██╗██║
+ ██║  ██║   ██║   ██║  ██║      ██║ ╚═╝ ██║██║  ██║██║ ╚████║
+ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝      ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝
+
+
+    AYA-MAN is young and reckless. His passion: exploring the far corners
+    of the world. Here he is braving a thousand dangers to cross the valley
+    of no return. Will he succeed ?
+
+INSTRUCTIONS
+
+    MENU
+        Use Up and Down arrow to navigate through the menu.
+        Select something pressing ENTER.
+    GAME
+        TO MOVE
+            Left arrow, 'A'  : go left
+            Right arrow, 'D' : go right
+            SPACE            : jump
+        TO ATTACK
+            'L'              : send fire ball
+        TO QUIT
+            ESC              : go back to menu
+
+
+FEATURES
+
+    -  AYA-MAN has 2000 pv and lose 200 if he touched an enemy, except mortal
+       traps.
+    -  AYA-MAN mooves to left and right, can jump and he suffers gravity.
+    -  There is 2 rooms in that game. You can access the second one if the
+       first has been successfuly ended.
+    -  Enemies can take 2 forms : trap and static foe.
+    -  Game over or not is indcated as the end of the game, before going back
+       to menu.
+    -  There is a music theme and different samples for different occasions :
+       touch an enemy, die, win, ...
+
+
+
+COPYRIGHT/ATTRIBUTION NOTICE
+
+    #opengameart.org#
+    Darkagent(Arbiyan) - Dirt/Soil
+    Big Rook Games     - Lava
+    Blarget2           - Background
+    Master484          - Mecha
