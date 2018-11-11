@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -g -Wall -Wextra -Werror -std=c99 -pedantic $(shell sdl2-config --cflags) -Iinc
 LDFLAGS = -L. #-lasan
-LDLIBS = -lm $(shell sdl2-config --libs) -lSDL2_image
+LDLIBS = -lm $(shell sdl2-config --libs) -lSDL2_image -lSDL2_mixer
 VPATH = src
 
 NAME = test

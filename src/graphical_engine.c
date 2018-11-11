@@ -1,6 +1,6 @@
 #include <err.h>
+#include "engine.h"
 #include "graphical_engine.h"
-#include <SDL_image.h>
 
 void load_textures(struct game_state *ga_st)
 {
@@ -77,6 +77,9 @@ void init_sdl(struct game_state *ga_st)
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
     IMG_Init(IMG_INIT_PNG);
     Mix_Init(MIX_INIT_MP3);
+    Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024);
+    Mix_Music *mus = Mix_LoadMUS("resources/audio/main_theme.mp3");
+    Mix_PlayMusic(mus, -1);
     window = SDL_CreateWindow("Window", SDL_WINDOWPOS_UNDEFINED,
             SDL_WINDOWPOS_UNDEFINED, 600, 400, 0);
     if (!window)
@@ -117,5 +120,7 @@ void free_sdl(struct game_state *ga_st)
     SDL_FreeSurface(ga_st->surface);
     SDL_DestroyWindow(ga_st->window);
     SDL_DestroyRenderer(ga_st->renderer);
+    //Mix_FreeMusic(ga_st->theme);
+    Mix_CloseAudio();
     IMG_Quit();
 }

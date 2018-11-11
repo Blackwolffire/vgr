@@ -8,8 +8,13 @@ int input_update(struct game_state *ga_st)
         if (event.type == SDL_QUIT)
             return 1;
         if (event.type == SDL_KEYDOWN)
+        {
             if (event.key.keysym.scancode == SDL_SCANCODE_SPACE)
                 player_jump(&ga_st->player);
+            else if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
+                return 2;
+        }
+
     }
 
     const Uint8 *key = SDL_GetKeyboardState(NULL);

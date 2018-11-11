@@ -2,7 +2,9 @@
 #define ENGINE_H
 
 #include "player.h"
+#include <SDL_audio.h>
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 
 #define GRAVITY 1.981
 
