@@ -2,11 +2,13 @@
 #include "engine.h"
 #include "graphical_engine.h"
 
+int g_size;
+
 void load_textures(struct game_state *ga_st)
 {
-    int size = 4;
-    struct tabTex *tabTex = malloc(sizeof(struct tabTex) * size);
-    for (int i = 0; i < 2; i++)
+    g_size = 6;
+    struct tabTex *tabTex = malloc(sizeof(struct tabTex) * g_size);
+    for (int i = 0; i < g_size - 3; i++)
     {
         char buff[256];
         sprintf(buff, "./resources/Sprites/Block%d.png", i);
@@ -18,16 +20,16 @@ void load_textures(struct game_state *ga_st)
     }
     SDL_Surface *pro = IMG_Load("./resources/Sprites/Projectile.png");
     SDL_Texture *tex_pro = SDL_CreateTextureFromSurface(ga_st->renderer, pro);
-    tabTex[3].tex = tex_pro;
-    tabTex[3].type = PROJECTILE;
+    tabTex[g_size - 3].tex = tex_pro;
+    tabTex[g_size - 3].type = PROJECTILE;
     SDL_Surface *img = IMG_Load("./resources/Sprites/Player2.png");
     SDL_Texture *tex = SDL_CreateTextureFromSurface(ga_st->renderer, img);
-    tabTex[size - 2].tex = tex;
-    tabTex[size - 2].type = DECOR;
+    tabTex[g_size - 2].tex = tex;
+    tabTex[g_size - 2].type = DECOR;
     SDL_Surface *image = IMG_Load("./resources/Backgrounds/background.png");
     SDL_Texture *textur = SDL_CreateTextureFromSurface(ga_st->renderer, image);
-    tabTex[size - 1].tex = textur;
-    tabTex[size - 1].type = DECOR;
+    tabTex[g_size - 1].tex = textur;
+    tabTex[g_size - 1].type = DECOR;
     SDL_FreeSurface(img);
     ga_st->tab = tabTex;
     return;
@@ -37,7 +39,7 @@ void update_graphic(struct game_state *ga_st)
 {
     IMG_Init(IMG_INIT_PNG);
 
-    SDL_RenderCopy(ga_st->renderer, ga_st->tab[3].tex, NULL, NULL);
+    SDL_RenderCopy(ga_st->renderer, ga_st->tab[g_size - 1].tex, NULL, NULL);
     struct game_object *cur = ga_st->l_go_dec;
     for (; cur != NULL; cur = cur->next)
     {
@@ -49,16 +51,15 @@ void update_graphic(struct game_state *ga_st)
         else if (cur->type == DEATH_BLOCK)
             i = 1;
         SDL_RenderCopy(ga_st->renderer, ga_st->tab[i].tex, &srcrect, &dstrect);
-        SDL_RenderCopy(ga_st->renderer, ga_st->tab[1].tex, &srcrect, &dstrect);
     }
 
     for (cur = ga_st->l_go_ent; cur != NULL; cur = cur->next)
     {
         int i = 0;
         if (cur->type == PLAYER)
-            i = 2;
+            i = g_size - 2;
         else if (cur->type == PROJECTILE)
-            i = 3;
+            i = g_size - 3;
         SDL_Rect srcrect = {cur->frame * 66, cur->animation * 66, 66, 66};
         SDL_Rect dstrect = {cur->pos.x - 23, cur->pos.y, 66,66};
         SDL_RenderCopy(ga_st->renderer, ga_st->tab[i].tex, &srcrect, &dstrect);
@@ -81,7 +82,7 @@ void init_sdl(struct game_state *ga_st)
     Mix_Music *mus = Mix_LoadMUS("resources/audio/main_theme.mp3");
     Mix_PlayMusic(mus, -1);
     window = SDL_CreateWindow("Window", SDL_WINDOWPOS_UNDEFINED,
-            SDL_WINDOWPOS_UNDEFINED, 600, 400, 0);
+            SDL_WINDOWPOS_UNDEFINED, 1280, 720, 0);
     if (!window)
     {
         warnx("pb window");
