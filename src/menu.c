@@ -7,7 +7,7 @@ void perform_selec(enum selec selec, struct game_state *ga_st, int *state)
     int tmp;
 
     ga_st = ga_st;
-    if (selec == 2)
+    if (selec == 1)
     {
         *state = 0;
         SDL_Quit();
@@ -23,9 +23,11 @@ void perform_selec(enum selec selec, struct game_state *ga_st, int *state)
             SDL_Quit();
         }
     }
-
     else
-        SDL_Delay(400);
+    {
+        Mix_PlayChannel(-1, ga_st->win, 0);
+        SDL_Delay(40);
+    }
 }
 
 void manage_update(enum selec selec, struct game_state *ga_st, int enter,
@@ -44,20 +46,18 @@ void manage_update(enum selec selec, struct game_state *ga_st, int enter,
 
     pos_bg = pos_bg;
 
-    SDL_SetRenderDrawColor(ga_st->renderer, 0, 43, 226, 0);
+    SDL_SetRenderDrawColor(ga_st->renderer, 255, 254, 254, 255);
     SDL_Rect pos_selec;
     pos_selec.w = 15;
     pos_selec.h = 15;
     pos_selec.x = 398;
 
     if (selec == 0)
-        pos_selec.y = 107;
+        pos_selec.y = 250;
     else if (selec == 1)
-        pos_selec.y = 150;
-    else if (selec == 2)
-        pos_selec.y = 187;
+        pos_selec.y = 370;
     else
-        pos_selec.y = 225;
+        pos_selec.y = 490;
 
     SDL_RenderCopy(ga_st->renderer, ga_st->texture, NULL, NULL);
     SDL_RenderFillRect(ga_st->renderer, &pos_selec);
@@ -70,7 +70,7 @@ void menu(struct game_state *ga_st)
 {
     init_sdl(ga_st);
     SDL_Event event;
-    enum selec selec = 1;
+    enum selec selec = 2;
     int state = 1;
     int enter_selec = 0;
 
@@ -90,14 +90,14 @@ void menu(struct game_state *ga_st)
         else if (key[SDL_SCANCODE_UP])
         {
             if (selec == 0)
-                selec = 3;
+                selec = 2;
             else
                 selec -= 1;
         }
 
         else if (key[SDL_SCANCODE_DOWN])
         {
-            if (selec == 3)
+            if (selec == 2)
                 selec = 0;
             else
                 selec += 1;

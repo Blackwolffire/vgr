@@ -6,9 +6,7 @@
 enum selec
 {
     PLAY,
-    INSTRUCTIONS,
-    QUIT,
-    COPYRIGHT
+    QUIT
 };
 
 void menu(struct game_state *ga_st);

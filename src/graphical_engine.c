@@ -106,7 +106,7 @@ void init_sdl(struct game_state *ga_st)
         warnx("pb renderer");
         exit(1);
     }
-    bg = IMG_Load("resources/background_menu_3_names.png");
+    bg = IMG_Load("resources/Backgrounds/forest_name.png");
     if (!bg)
     {
         warnx("pb image");
