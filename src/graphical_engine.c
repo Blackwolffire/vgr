@@ -7,7 +7,7 @@ static int g_size;
 
 void load_textures(struct game_state *ga_st)
 {
-    g_size = 9;
+    g_size = 10;
     struct tabTex *tabTex = malloc(sizeof(struct tabTex) * g_size);
     for (int i = 0; i < g_size - 3; i++)
     {
@@ -73,6 +73,8 @@ void update_graphic(struct game_state *ga_st)
             i = 4;
             s = 32;
         }
+        else
+            i = 6;
         SDL_Rect srcrect = {cur->frame * s, cur->animation * s, s, s};
         SDL_Rect dstrect = {cur->pos.x - 23, cur->pos.y - 10,s , s};
         SDL_RenderCopy(ga_st->renderer, ga_st->tab[i].tex, &srcrect, &dstrect);
