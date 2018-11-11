@@ -1,8 +1,9 @@
 #include <err.h>
 #include "engine.h"
 #include "graphical_engine.h"
+#include "player.h"
 
-int g_size;
+static int g_size;
 
 void load_textures(struct game_state *ga_st)
 {
@@ -30,7 +31,6 @@ void load_textures(struct game_state *ga_st)
     SDL_Texture *textur = SDL_CreateTextureFromSurface(ga_st->renderer, image);
     tabTex[g_size - 1].tex = textur;
     tabTex[g_size - 1].type = DECOR;
-
 
     SDL_FreeSurface(img);
     SDL_FreeSurface(pro);
@@ -77,6 +77,9 @@ void update_graphic(struct game_state *ga_st)
         SDL_Rect dstrect = {cur->pos.x - 23, cur->pos.y - 10,s , s};
         SDL_RenderCopy(ga_st->renderer, ga_st->tab[i].tex, &srcrect, &dstrect);
     }
+    SDL_Rect hub = {0 , 0, ga_st->player.go->life/3, 20};
+    SDL_RenderDrawRect(ga_st->renderer, &hub);
+
     SDL_RenderPresent(ga_st->renderer);
     SDL_RenderClear(ga_st->renderer);
 }
