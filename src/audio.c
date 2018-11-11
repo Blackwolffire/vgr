@@ -3,7 +3,7 @@
 
 void play_chunk(struct game_state *ga_st, struct game_object *dec)
 {
-    if (dec->type == DEATH_BLOCK || dec->type == ENNEMY ||
+    if (dec->type == DEATH_BLOCK || dec->type == ENEMY ||
         dec->type == PROJECTILE)
         Mix_PlayChannel(-1, ga_st->cri, 0);
     if (dec->type == EXIT)
