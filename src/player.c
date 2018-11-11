@@ -13,11 +13,11 @@ void player_run(struct player *player, char direction)
     player->go->speed.x = direction * PLAYER_SPEED;
     if (direction == 0)
     {
-        player->go->animation = 0;
-        if (player->go->animation == 2)
-            player->go->frame = 1;
+        if (player->go->animation == 0)
+            player->go->frame = 2;
         else
-            player->go->frame = 0;
+            player->go->frame = 1;
+        player->go->animation = 0;
     }
     else if (direction == 1)
     {

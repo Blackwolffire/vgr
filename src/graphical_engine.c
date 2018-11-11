@@ -41,8 +41,6 @@ void update_graphic(struct game_state *ga_st)
     struct game_object *cur = ga_st->l_go_dec;
     for (; cur != NULL; cur = cur->next)
     {
-        //cur->frame = 0;
-        //cur->animation = 0;
         SDL_Rect srcrect = {0.,0.,16,16};
         SDL_Rect dstrect = {cur->pos.x, cur->pos.y, 16,16};
         int i = 2;
@@ -55,14 +53,13 @@ void update_graphic(struct game_state *ga_st)
 
     for (cur = ga_st->l_go_ent; cur != NULL; cur = cur->next)
     {
-        //cur->animation = 1;
         int i = 0;
         if (cur->type == PLAYER)
             i = 4;
         else if (cur->type == PROJECTILE)
             i = 3;
         SDL_Rect srcrect = {cur->frame * 66, cur->animation * 66, 66, 66};
-        SDL_Rect dstrect = {cur->pos.x, cur->pos.y, 66,66};
+        SDL_Rect dstrect = {cur->pos.x - 23, cur->pos.y, 66,66};
         SDL_RenderCopy(ga_st->renderer, ga_st->tab[i].tex, &srcrect, &dstrect);
     }
     SDL_RenderPresent(ga_st->renderer);
