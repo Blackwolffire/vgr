@@ -45,7 +45,10 @@ void update_graphic(struct game_state *ga_st)
         //cur->animation = 0;
         SDL_Rect srcrect = {0.,0.,16,16};
         SDL_Rect dstrect = {cur->pos.x, cur->pos.y, 16,16};
-        SDL_RenderCopy(ga_st->renderer, ga_st->tab[2].tex, &srcrect, &dstrect);
+        int i = 2;
+        if (cur->type == DECOR_SUP)
+            i = 0;
+        SDL_RenderCopy(ga_st->renderer, ga_st->tab[i].tex, &srcrect, &dstrect);
     }
 
     for (cur = ga_st->l_go_ent; cur != NULL; cur = cur->next)
