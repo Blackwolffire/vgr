@@ -48,6 +48,8 @@ void update_graphic(struct game_state *ga_st)
         int i = 2;
         if (cur->type == DECOR_SUP)
             i = 0;
+        else if (cur->type == DEATH_BLOCK)
+            i = 1;
         SDL_RenderCopy(ga_st->renderer, ga_st->tab[i].tex, &srcrect, &dstrect);
     }
 
