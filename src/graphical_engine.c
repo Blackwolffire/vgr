@@ -68,6 +68,22 @@ void update_graphic(struct game_state *ga_st)
     SDL_RenderClear(ga_st->renderer);
 }
 
+void init_music(struct game_state *ga_st)
+{
+    Mix_Init(MIX_INIT_MP3);
+    Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024);
+    Mix_Music *mus = Mix_LoadMUS("resources/audio/main_theme.mp3");
+    Mix_Chunk *cri = Mix_LoadWAV("resources/audio/SF-cri54.mp3");
+    Mix_Chunk *def = Mix_LoadWAV("resources/audio/sf_defenestration_01.mp3");
+    Mix_Chunk *win = Mix_LoadWAV("resources/audio/SF-yehaw.mp3");
+    Mix_PlayMusic(mus, -1);
+
+    ga_st->music = mus;
+    ga_st->win = win;
+    ga_st->def = def;
+    ga_st->cri = cri;
+}
+
 void init_sdl(struct game_state *ga_st)
 {
     SDL_Window *window = NULL;
@@ -77,13 +93,6 @@ void init_sdl(struct game_state *ga_st)
 
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
     IMG_Init(IMG_INIT_PNG);
-    Mix_Init(MIX_INIT_MP3);
-    Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024);
-    Mix_Music *mus = Mix_LoadMUS("resources/audio/main_theme.mp3");
-    Mix_Chunk *cri = Mix_LoadWAV("resources/audio/SF-cri54.mp3");
-    Mix_Chunk *def = Mix_LoadWAV("resources/audio/sf_defenestration_01.mp3");
-    Mix_Chunk *win = Mix_LoadWAV("resources/audio/SF-yehaw.mp3");
-    Mix_PlayMusic(mus, -1);
     window = SDL_CreateWindow("Window", SDL_WINDOWPOS_UNDEFINED,
             SDL_WINDOWPOS_UNDEFINED, 1280, 720, 0);
     if (!window)
@@ -110,16 +119,12 @@ void init_sdl(struct game_state *ga_st)
         warnx("pb text");
         exit(1);
     }
+    init_music(ga_st);
 
     ga_st->window = window;
     ga_st->renderer = renderer;
     ga_st->texture = text;
     ga_st->surface = bg;
-
-    ga_st->music = mus;
-    ga_st->win = win;
-    ga_st->def = def;
-    ga_st->cri = cri;
 
 }
 
