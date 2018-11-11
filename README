@@ -1,5 +1,5 @@
 
-█████╗ ██╗   ██╗ █████╗       ███╗   ███╗ █████╗ ███╗   ██╗
+  █████╗ ██╗   ██╗ █████╗       ███╗   ███╗ █████╗ ███╗   ██╗
  ██╔══██╗╚██╗ ██╔╝██╔══██╗      ████╗ ████║██╔══██╗████╗  ██║
  ███████║ ╚████╔╝ ███████║█████╗██╔████╔██║███████║██╔██╗ ██║
  ██╔══██║  ╚██╔╝  ██╔══██║╚════╝██║╚██╔╝██║██╔══██║██║╚██╗██║
@@ -40,6 +40,7 @@ FEATURES
        to menu.
     -  There is a music theme and different samples for different occasions :
        touch an enemy, die, win, ...
+    -  CheatCode : find the cheatcode to end the game
 
 
 
