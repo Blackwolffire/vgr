@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include "engine.h"
 #include "constant_sprite.h"
+#include "enemy.h"
 
 struct vec2 vadd(struct vec2 a, struct vec2 b)
 {
@@ -69,7 +70,7 @@ static void load_go(struct game_state *ga_st, int x, int y, char type)
         go->gpos.w = FLOOR_WIDTH;
         go->gpos.h = FLOOR_HEIGHT;
     }
-    else if (type == '4')
+    else if (type == '5')
     {
         go->type = ENEMY;
         go_ent_list_add(ga_st, go);

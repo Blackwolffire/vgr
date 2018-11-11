@@ -1,6 +1,7 @@
 #include <math.h>
 #include "audio.h"
 #include "physical_engine.h"
+#include "enemy.h"
 
 static void collision(struct game_state *ga_st, struct game_object *go,
                       struct game_object *gob)
@@ -94,7 +95,10 @@ static void ph_go_ent_update(struct game_state *ga_st, struct game_object *go,
     while (dec)
     {
         if (go == dec)
+        {
+            dec = dec->next;
             continue;
+        }
         if (pos.x >= dec->pos.x && pos.x <= dec->pos.x + dec->gpos.w
             && pos.y >= dec->pos.y && pos.y <= dec->pos.y + dec->gpos.h)
         {
@@ -164,19 +168,20 @@ static void ph_go_ent_ent_up(struct game_state *ga_st, struct game_object *go)
     while (ent)
     {
         if (go == ent)
+        {
+            ent = ent->next;
             continue;
+        }
         if (pos.x >= ent->pos.x && pos.x <= ent->pos.x + ent->gpos.w
             && pos.y >= ent->pos.y && pos.y <= ent->pos.y + ent->gpos.h)
         {
-            collid = 1;
             collision(ga_st, go, ent);
             ent->isupdate = 1;
         }
         else if (pos.x + go->gpos.w >= ent->pos.x
-                && pos.x + go->gpos.w <= ent->pos.x + dent>gpos.w
+                && pos.x + go->gpos.w <= ent->pos.x + ent->gpos.w
                 && pos.y >= ent->pos.y && pos.y <= ent->pos.y + ent->gpos.h)
         {
-            collid = 1;
             collision(ga_st, go, ent);
             ent->isupdate = 1;
         }
@@ -184,7 +189,6 @@ static void ph_go_ent_ent_up(struct game_state *ga_st, struct game_object *go)
                  && pos.y + go->gpos.h >= ent->pos.y
                  && pos.y + go->gpos.h <= ent->pos.y + ent->gpos.h)
         {
-            collid = floor_col = 1;
             collision(ga_st, go, ent);
             ent->isupdate = 1;
         }
@@ -193,7 +197,6 @@ static void ph_go_ent_ent_up(struct game_state *ga_st, struct game_object *go)
                  && pos.y + go->gpos.h >= ent->pos.y
                  && pos.y + go->gpos.h <= ent->pos.y + ent->gpos.h)
         {
-            collid = floor_col = 1;
             collision(ga_st, go, ent);
             ent->isupdate = 1;
         }
