@@ -6,7 +6,7 @@ int g_size;
 
 void load_textures(struct game_state *ga_st)
 {
-    g_size = 8;
+    g_size = 9;
     struct tabTex *tabTex = malloc(sizeof(struct tabTex) * g_size);
     for (int i = 0; i < g_size - 3; i++)
     {
@@ -38,7 +38,6 @@ void load_textures(struct game_state *ga_st)
 void update_graphic(struct game_state *ga_st)
 {
     IMG_Init(IMG_INIT_PNG);
-
     SDL_RenderCopy(ga_st->renderer, ga_st->tab[g_size - 1].tex, NULL, NULL);
     struct game_object *cur = ga_st->l_go_dec;
     for (; cur != NULL; cur = cur->next)
@@ -50,6 +49,8 @@ void update_graphic(struct game_state *ga_st)
             i = 0;
         else if (cur->type == DEATH_BLOCK)
             i = 1;
+        else if (cur->type == EXIT)
+            i = 5;
         SDL_RenderCopy(ga_st->renderer, ga_st->tab[i].tex, &srcrect, &dstrect);
     }
 
@@ -65,7 +66,10 @@ void update_graphic(struct game_state *ga_st)
         else if (cur->type == PROJECTILE)
             i = g_size - 3;
         else if (cur->type == ENEMY)
+        {
             i = 4;
+            s = 32;
+        }
         SDL_Rect srcrect = {cur->frame * s, cur->animation * s, s, s};
         SDL_Rect dstrect = {cur->pos.x - 23, cur->pos.y - 10,s , s};
         SDL_RenderCopy(ga_st->renderer, ga_st->tab[i].tex, &srcrect, &dstrect);
