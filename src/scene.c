@@ -1,6 +1,18 @@
 #include "graphical_engine.h"
 #include "input.h"
 #include "physical_engine.h"
+#include <SDL_ttf.h>
+
+void winScreen(struct game_state *ga_st)
+{
+    SDL_SetRenderDrawColor(ga_st->renderer,0,0,0,255);
+    SDL_RenderClear(ga_st->renderer);
+    SDL_Surface *surf = IMG_Load("./resources/Backgrounds/Win.png");
+    SDL_Texture *tex = SDL_CreateTextureFromSurface(ga_st->renderer, surf);
+    SDL_RenderCopy(ga_st->renderer, tex, NULL, NULL);
+    SDL_RenderPresent(ga_st->renderer);
+    SDL_Delay(2000);
+}
 
 int game_loop(struct game_state *ga_st)
 {
@@ -23,7 +35,10 @@ int game_loop(struct game_state *ga_st)
         if (!ga_st->player.alive)
             return 0;
         if (ga_st->player.won)
+        {
+            winScreen(ga_st);
             return 3;
+        }
         SDL_Delay(1);
     }
 
