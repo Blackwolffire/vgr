@@ -7,7 +7,6 @@
 #include "engine.h"
 #include "constant_sprite.h"
 #include "enemy.h"
-#include <stdio.h>
 
 struct vec2 vadd(struct vec2 a, struct vec2 b)
 {

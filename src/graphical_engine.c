@@ -59,8 +59,6 @@ void update_graphic(struct game_state *ga_st)
 
     for (cur = ga_st->l_go_ent; cur != NULL; cur = cur->next)
     {
-        printf("%d x %.2f y %.2f  %p\n", cur->type, cur->pos.x, cur->pos.y,
-                (void*)cur);
         int i = 0;
         int s = 16; //size
         if (cur->type == PLAYER)
@@ -86,7 +84,6 @@ void update_graphic(struct game_state *ga_st)
 
     SDL_RenderPresent(ga_st->renderer);
     SDL_RenderClear(ga_st->renderer);
-    printf("------------------------------------\n");
 }
 
 void init_music(struct game_state *ga_st)

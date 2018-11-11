@@ -3,8 +3,6 @@
 #include "physical_engine.h"
 #include "enemy.h"
 
-#include <stdio.h>
-
 static void collision(struct game_state *ga_st, struct game_object *go,
                       struct game_object *gob)
 {

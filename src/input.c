@@ -43,12 +43,6 @@ int input_update(struct game_state *ga_st)
     }
     else
         player_run(&ga_st->player, 0);
-/*
-    if (key[SDL_SCANCODE_L])
-    {
-    }
-    else
-        nb = 0;*/
 
     return 0;
 }
