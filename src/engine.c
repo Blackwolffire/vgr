@@ -75,6 +75,7 @@ static void load_go(struct game_state *ga_st, int x, int y, char type)
     else if (type == '5')
     {
         go->type = ENEMY;
+        go->life = ENEMY_LIFE;
         go_ent_list_add(ga_st, go);
         go->gpos.w = ENEMY_WIDTH;
         go->gpos.h = ENEMY_HEIGHT;

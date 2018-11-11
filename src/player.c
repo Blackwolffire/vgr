@@ -47,12 +47,12 @@ void player_shoot(struct player *player)
     go->speed.y = 0.;
     if (player->go->speed.x < 0.)
     {
-        go->pos.x = player->go->pos.x - FLOOR_WIDTH - 1.;
+        go->pos.x = player->go->pos.x - FLOOR_WIDTH * 2.;
         go->speed.x = -PLAYER_SPEED * 2;
     }
     else
     {
-        go->pos.x = player->go->pos.x + player->go->gpos.w + FLOOR_WIDTH + 1.;
+        go->pos.x = player->go->pos.x + player->go->gpos.w + FLOOR_WIDTH * 2.;
         go->speed.x = PLAYER_SPEED * 2;
     }
     go->type = PROJECTILE;
