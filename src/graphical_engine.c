@@ -80,6 +80,9 @@ void init_sdl(struct game_state *ga_st)
     Mix_Init(MIX_INIT_MP3);
     Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024);
     Mix_Music *mus = Mix_LoadMUS("resources/audio/main_theme.mp3");
+    /*Mix_Chunk *cri = Mix_LoadWAV("resources/audio/SF-cri54.mp3");
+    Mix_Chunk *def = Mix_LoadWAV("resources/audio/sf_defenestration_01.mp3");
+    Mix_Chunk *win = Mix_LoadWAV("resources/audio/SF-yehaw.mp3");*/
     Mix_PlayMusic(mus, -1);
     window = SDL_CreateWindow("Window", SDL_WINDOWPOS_UNDEFINED,
             SDL_WINDOWPOS_UNDEFINED, 1280, 720, 0);
@@ -113,6 +116,11 @@ void init_sdl(struct game_state *ga_st)
     ga_st->texture = text;
     ga_st->surface = bg;
 
+    /*ga_st->music = mus;
+    ga_st->win = win;
+    ga_st->def = def;
+    ga_st->cri = cri;*/
+
 }
 
 void free_sdl(struct game_state *ga_st)
@@ -121,7 +129,7 @@ void free_sdl(struct game_state *ga_st)
     SDL_FreeSurface(ga_st->surface);
     SDL_DestroyWindow(ga_st->window);
     SDL_DestroyRenderer(ga_st->renderer);
-    //Mix_FreeMusic(ga_st->theme);
+    //Mix_FreeMusic(ga_st->music);
     Mix_CloseAudio();
     IMG_Quit();
 }
